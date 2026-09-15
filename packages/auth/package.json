@@ -1,0 +1,17 @@
+{
+  "name": "@commutai/auth",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "dependencies": {
+    "@commutai/supabase": "../supabase",
+    "@commutai/types": "../types",
+    "@supabase/supabase-js": "^2.49.4",
+    "react": "^19.2.7",
+    "react-router-dom": "^6.26.1"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  }
+}
