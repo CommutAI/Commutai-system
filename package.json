@@ -1,0 +1,36 @@
+{
+  "name": "commutai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CommutAI Transportation Management System",
+  "scripts": {
+    "dev": "cd apps/web && npm run dev",
+    "dev:public": "cd apps/public-dashboard && npm run dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:public\"",
+    "build": "cd apps/web && npm run build",
+    "build:public": "cd apps/public-dashboard && npm run build",
+    "test": "turbo test",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^24.13.2",
+    "concurrently": "^8.2.2",
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "npm@10.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=10.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
+    "dotenv": "^17.4.2"
+  }
+}
