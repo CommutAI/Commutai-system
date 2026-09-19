@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   CreditCard,
+  Ticket,
   History,
   Menu,
   X,
@@ -23,22 +24,16 @@ interface NavItem {
 
 const navigation: NavItem[] = [
   { name: 'Dashboard', href: '.', icon: LayoutDashboard },
-  { name: 'QR Card Management', href: 'qr-cards', icon: CreditCard },
+  { name: 'QR Cards', href: 'qr-cards', icon: CreditCard },
+  { name: 'Temporary QR Cards', href: 'temporary-qr-cards', icon: Ticket },
   { name: 'Reload Card', href: 'reload-card', icon: RefreshCw },
-  { name: 'Card Reservation Management', href: 'card-reservations', icon: Users },
-  { name: 'Transaction History', href: 'transactions', icon: History },
+  { name: 'Passengers', href: 'passengers', icon: Users },
+  { name: 'Transactions', href: 'transactions', icon: History },
   { name: 'Reports', href: 'reports', icon: BarChart3 },
 ];
 
 const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (value: boolean) => void }) => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('/login');
-  };
 
   const isItemActive = (path: string) => {
     if (path === '.') {
@@ -102,27 +97,19 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (value: bo
             );
           })}
         </nav>
-
-        {/* Logout button at bottom of sidebar */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
-          <button
-            onClick={handleSignOut}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-white/70 hover:bg-red-500/20 hover:text-red-400 ${
-              !isOpen ? 'justify-center' : ''
-            }`}
-            title="Sign out"
-          >
-            <LogOut size={20} />
-            {isOpen && <span className="font-medium">Sign Out</span>}
-          </button>
-        </div>
       </aside>
     </>
   );
 };
 
 const Header = () => {
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/login');
+  };
 
   return (
     <header className="glass-card h-16 flex items-center justify-end px-6 mb-6">
@@ -134,6 +121,13 @@ const Header = () => {
         <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
           <User className="text-white" size={20} />
         </div>
+        <button
+          onClick={handleSignOut}
+          title="Sign out"
+          className="p-2 text-white/60 hover:text-red-400 hover:bg-white/10 rounded-lg transition-colors"
+        >
+          <LogOut className="w-5 h-5" />
+        </button>
       </div>
     </header>
   );
@@ -143,13 +137,11 @@ export default function AdminLayout() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="min-h-screen">
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-      <main className={`transition-all duration-300 flex-1 flex flex-col ${isOpen ? 'ml-64' : 'ml-20'} p-6 overflow-hidden`}>
+      <main className={`transition-all duration-300 ${isOpen ? 'ml-64' : 'ml-20'} p-6`}>
         <Header />
-        <div className="flex-1 min-h-0 overflow-y-auto">
-          <Outlet />
-        </div>
+        <Outlet />
       </main>
     </div>
   );

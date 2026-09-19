@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { Button, Input, Form, FormField, Modal } from '@commutai/ui';
-import AuditService from '../../services/auditService';
 
 interface QRCard {
   id: string;
@@ -110,8 +109,6 @@ export default function ReloadCard() {
   const reloadMutation = useMutation({
     mutationFn: () => apiCalls.topUp(cardId, amount, 'cash'),
     onSuccess: (data) => {
-      const prevBalance = (data?.balance_after ?? 0) - amount;
-      AuditService.logCardReloaded(cardId, amount, prevBalance, data?.balance_after ?? 0);
       toast.success(`Card reloaded successfully! Amount: ₱${amount.toFixed(2)}`);
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
@@ -145,7 +142,6 @@ export default function ReloadCard() {
   };
 
   return (
-    <div className="h-full overflow-y-auto pr-1">
     <div>
       <h1 className="text-xl font-bold text-white mb-4">Reload Card</h1>
 
@@ -172,11 +168,11 @@ export default function ReloadCard() {
                       }}
                       onFocus={() => setShowSuggestions(true)}
                       onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                      className={`font-mono text-orange-400 ${cardError ? 'border-red-300 focus:border-red-500' : ''}`}
+                      className={`font-mono ${cardError ? 'border-red-300 focus:border-red-500' : ''}`}
                       error={cardError}
                     />
                     {showSuggestions && cardSuggestions.length > 0 && (
-                      <div className="absolute z-10 w-full mt-1 bg-gray-900 border border-white/20 rounded-2xl shadow-lg max-h-48 overflow-y-auto">
+                      <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-2xl shadow-lg max-h-48 overflow-y-auto">
                         {cardSuggestions.map((card) => (
                           <button
                             key={card.id}
@@ -185,11 +181,11 @@ export default function ReloadCard() {
                               setCardId(card.card_uid);
                               setShowSuggestions(false);
                             }}
-                            className="w-full px-4 py-3 text-left hover:bg-white/20 transition-colors border-b border-white/10 last:border-b-0"
+                            className="w-full px-4 py-3 text-left hover:bg-gray-100 transition-colors border-b border-gray-100 last:border-b-0"
                           >
                             <div className="flex justify-between items-center">
-                              <span className="font-mono text-sm font-medium text-white">{card.card_uid}</span>
-                              <span className="text-xs text-white/60">{card.owner_name}</span>
+                              <span className="font-mono text-sm font-medium text-gray-900">{card.card_uid}</span>
+                              <span className="text-xs text-gray-600">{card.owner_name}</span>
                             </div>
                           </button>
                         ))}
@@ -231,7 +227,7 @@ export default function ReloadCard() {
                     onClick={() => handleAmountChange(amt)}
                     className={`px-3 py-3 rounded-xl font-medium transition-all border ${
                       amount === amt && !customAmount
-                        ? 'bg-blue-500 text-white shadow-soft border-2 border-blue-400'
+                        ? 'bg-primary-500 text-white shadow-soft border-2 border-primary-400'
                         : 'bg-white/10 text-white/70 hover:bg-white/20 border border-white/20'
                     }`}
                   >
@@ -314,7 +310,6 @@ export default function ReloadCard() {
         />
       )}
     </div>
-    </div>
   );
 }
 
@@ -325,37 +320,37 @@ function ReceiptModal({ transaction, onClose }: { transaction: Transaction; onCl
       onClose={onClose}
       title="Receipt"
     >
-      <div className="border-t border-b border-white/20 py-6 space-y-3">
+      <div className="border-t border-b border-secondary-200 py-6 space-y-3">
         <div className="flex justify-between">
-          <span className="text-white/60">Transaction ID</span>
-          <span className="font-medium text-white">{transaction.id}</span>
+          <span className="text-secondary-600">Transaction ID</span>
+          <span className="font-medium text-secondary-900">{transaction.id}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-white/60">Type</span>
-          <span className="font-medium text-white">{transaction.type}</span>
+          <span className="text-secondary-600">Type</span>
+          <span className="font-medium text-secondary-900">{transaction.type}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-white/60">Reload Amount</span>
-          <span className="font-bold text-emerald-400">+₱{transaction.amount.toFixed(2)}</span>
+          <span className="text-secondary-600">Reload Amount</span>
+          <span className="font-bold text-emerald-600">+₱{transaction.amount.toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-white/60">New Balance</span>
-          <span className="font-bold text-white">₱{(transaction.balance_after ?? 0).toFixed(2)}</span>
+          <span className="text-secondary-600">New Balance</span>
+          <span className="font-bold text-secondary-900">₱{(transaction.balance_after ?? 0).toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-white/60">Channel</span>
-          <span className="font-medium capitalize text-white">{transaction.channel}</span>
+          <span className="text-secondary-600">Channel</span>
+          <span className="font-medium capitalize text-secondary-900">{transaction.channel}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-white/60">Date</span>
-          <span className="font-medium text-white">{formatRelativeTime(transaction.created_at)}</span>
+          <span className="text-secondary-600">Date</span>
+          <span className="font-medium text-secondary-900">{formatRelativeTime(transaction.created_at)}</span>
         </div>
       </div>
       <Button
         onClick={() => window.print()}
         variant="primary"
         fullWidth
-        className="bg-blue-500 hover:bg-blue-600 border-blue-400"
+        className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700"
       >
         Print Receipt
       </Button>

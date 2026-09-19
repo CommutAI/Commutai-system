@@ -3,7 +3,7 @@ import { supabase } from '@commutai/supabase';
 export const apiCalls = {
   // QR Card operations
   getQRCards: async () => {
-    const { data, error } = await supabase.from('qr_cards').select('*').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('qr_cards').select('*');
     if (error) throw error;
     return data;
   },
@@ -12,19 +12,7 @@ export const apiCalls = {
     // Use the temporary_tickets table instead of qr_cards
     const { data, error } = await supabase.from('temporary_tickets').select('*');
     if (error) throw error;
-    
-    // Transform temporary_tickets data to match QR card schema
-    return data?.map((ticket: any) => ({
-      id: ticket.id,
-      card_uid: ticket.ticket_uid,
-      owner_name: 'Temporary Card',
-      contact_number: '',
-      card_type: ticket.passenger_type,
-      status: ticket.status === 'validated' ? 'active' : ticket.status,
-      balance: parseFloat(ticket.fare_amount) || 0,
-      created_at: ticket.issued_at,
-      purchase_price: parseFloat(ticket.fare_amount) || 0,
-    })) || [];
+    return data;
   },
   
   createQRCard: async (cardData: any) => {
@@ -33,31 +21,12 @@ export const apiCalls = {
     return data;
   },
   
-  createTemporaryQRCard: async (passengerType: string) => {
-    // Generate temporary card ID based on passenger type
-    const typeIndicators: Record<string, string> = {
-      'Regular': 'TRC',
-      'Student': 'TSC',
-      'Senior Citizen': 'TSCC',
-      'PWD': 'TPC'
-    };
-    const indicator = typeIndicators[passengerType] || 'TRC';
-    const randomNum = Math.floor(10000000 + Math.random() * 90000000).toString();
-    const formattedNum = `${randomNum.slice(0, 3)}-${randomNum.slice(3, 5)}-${randomNum.slice(5)}`;
-    const ticketUid = `${indicator}-${formattedNum}`;
-
+  createTemporaryQRCard: async (fareAmount: number = 12) => {
     const { data, error } = await (supabase.from('temporary_tickets').insert([{
-      ticket_uid: ticketUid,
-      fare_amount: '100.00',
-      status: 'validated',
-      allowed_routes: [],
-      passenger_id: null,
-      trip_id: null,
-      issued_by: null,
-      issued_at: new Date().toISOString(),
-      validated_at: new Date().toISOString(),
-      destination: null,
-      passenger_type: passengerType.toLowerCase().replace(' ', '_'),
+      ticket_uid: `TEMP-${Date.now()}`,
+      fare_amount: fareAmount,
+      status: 'issued',
+      allowed_routes: []
     }] as any).select() as any);
     if (error) throw error;
     return data;
@@ -76,35 +45,8 @@ export const apiCalls = {
   },
   
   deleteQRCard: async (id: string) => {
-    // Try to delete transactions first to satisfy foreign key constraint
-    const { error: transactionError } = await supabase
-      .from('transactions')
-      .delete()
-      .eq('card_id', id);
-
-    if (transactionError) {
-      console.error('Failed to delete transactions:', transactionError);
-      // Continue anyway - might be cascaded or we'll handle the card deletion differently
-    }
-
-    // Try to delete the card
-    const { error } = await supabase
-      .from('qr_cards')
-      .delete()
-      .eq('id', id);
-
-    if (error) {
-      // If deletion fails due to foreign key, use soft delete as fallback
-      const { error: updateError } = await supabase
-        .from('qr_cards')
-        .update({ status: 'deactivated' })
-        .eq('id', id);
-
-      if (updateError) {
-        throw new Error('Cannot delete this card because it has transaction history. Please contact database administrator to modify foreign key constraints.');
-      }
-      console.warn('Card soft-deleted due to foreign key constraint');
-    }
+    const { error } = await (supabase.from('qr_cards').delete().eq('id', id) as any);
+    if (error) throw error;
   },
   
   // Additional QR Card operations

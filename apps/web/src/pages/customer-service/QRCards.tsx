@@ -4,27 +4,20 @@ import type { QRCard } from '../types';
 import {
   CreditCard, Plus, Power, PowerOff, RefreshCw,
   X, User, Phone, CheckCircle, ChevronRight, Ticket,
-  Eye, Edit, Trash2, QrCode, Wallet, Clock, XCircle, Printer,
+  Eye, Edit, Trash2,
 } from 'lucide-react';
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuditService from '../../services/auditService';
-import { QRCodeSVG, QRCodeCanvas } from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 // import QRCardDisplay from "../../components/QRCardDisplay";
 // import TemporaryCardDisplay from "../../components/TemporaryCardDisplay";
 import toast from 'react-hot-toast';
-import { Button, Input, Form, FormField, Modal, Select } from '@commutai/ui';
+import { Button, Input, Form, FormField, Modal } from '@commutai/ui';
 
 import regularImg from './assets/REGULAR.png';
 import studentImg  from './assets/STUDENT.png';
 import seniorImg   from './assets/SENIOR-CITIZIEN.png';
 import pwdImg      from './assets/PWD.png';
-
-import tempRegularCard from './assets/TEMP-REG.png';
-import tempStudentCard from './assets/TEMP-STUD.png';
-import tempSeniorCard from './assets/temp-senior.png';
-import tempPwdCard from './assets/TEMP-PWD.png';
-import tempBackCard from './assets/temp-back.png';
 
 type PassengerType = 'regular' | 'student' | 'senior_citizen' | 'pwd';
 
@@ -73,21 +66,8 @@ function RegisterCardModal({
   });
 
   const handleInfoNext = (values: Record<string, any>) => {
-    if (!values.owner_name?.trim() || !values.contact_number?.trim()) return;
-
-    // Validate PH mobile number: must start with 09 and be exactly 11 digits
-    const raw = values.contact_number.trim();
-    const phMobileRegex = /^09\d{9}$/;
-    if (!phMobileRegex.test(raw)) {
-      toast.error('Enter a valid PH mobile number (e.g. 09171234567)');
-      return;
-    }
-
-    setData(d => ({
-      ...d,
-      owner_name: values.owner_name,
-      contact_number: raw
-    }));
+    if (!values.ownerName?.trim() || !values.contactNumber?.trim()) return;
+    setData(d => ({ ...d, owner_name: values.ownerName, contact_number: values.contactNumber }));
     setStep('type');
   };
 
@@ -103,18 +83,18 @@ function RegisterCardModal({
       'senior_citizen': 'SCC',
       'pwd': 'PC'
     };
-    const indicator = typeIndicators[data.card_type] || 'RC';
+    const indicator = typeIndicators[data.passengerType] || 'RC';
     const randomNum = Math.floor(10000000 + Math.random() * 90000000).toString();
     const formattedNum = `${randomNum.slice(0, 3)}-${randomNum.slice(3, 5)}-${randomNum.slice(5)}`;
     return `${indicator}-${formattedNum}`;
-  }, [data.card_type]);
+  }, [data.passengerType]);
 
   const handleSubmit = () => {
     setError(null);
     issueMutation.mutate({
-      owner_name:     data.owner_name.trim(),
-      contact_number: data.contact_number.trim(),
-      card_type: data.card_type,
+      owner_name:     data.ownerName.trim(),
+      contact_number: data.contactNumber.trim(),
+      card_type: data.passengerType,
       card_uid: previewCardId,
       status: 'active',
       balance: 0,
@@ -122,7 +102,7 @@ function RegisterCardModal({
     });
   };
 
-  const selectedType = TYPE_OPTIONS.find(t => t.value === data.card_type)!;
+  const selectedType = TYPE_OPTIONS.find(t => t.value === data.passengerType)!;
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -157,20 +137,21 @@ function RegisterCardModal({
 
         {/* ── Step 1: Personal Info ── */}
         {step === 'info' && (
-          <div className="px-6 py-5 space-y-4">
-            <Form
-              initialValues={{
-                owner_name: data.owner_name,
-                contact_number: data.contact_number,
-              }}
-              onSubmit={handleInfoNext}
+          <Form
+            initialValues={{
+              ownerName: data.owner_name,
+              contactNumber: data.contact_number,
+            }}
+            onSubmit={handleInfoNext}
+          >
+            <FormField
+              name="ownerName"
+              label="Full Name"
+              required
             >
-              <FormField
-                name="owner_name"
-                label="Full Name"
-                required
-              >
-                {(field) => (
+              {(field) => (
+                <div>
+                  <User className="w-4 h-4 inline mr-1.5 text-white/40" />
                   <Input
                     type="text"
                     required
@@ -179,86 +160,81 @@ function RegisterCardModal({
                     value={field.value}
                     onChange={(e) => {
                       field.onChange(e.target.value);
+                      setData(d => ({ ...d, ownerName: e.target.value }));
                     }}
-                    icon={User}
                     className="bg-white/10 border-white/20 text-white"
                   />
-                )}
-              </FormField>
-              <FormField
-                name="contact_number"
-                label="Contact Number"
-                required
-              >
-                {(field) => (
+                </div>
+              )}
+            </FormField>
+            <FormField
+              name="contactNumber"
+              label="Contact Number"
+              required
+            >
+              {(field) => (
+                <div>
+                  <Phone className="w-4 h-4 inline mr-1.5 text-white/40" />
                   <Input
                     type="tel"
                     required
                     placeholder="e.g. 09171234567"
                     value={field.value}
                     onChange={(e) => {
-                      // Only allow digits, enforce 09 prefix, limit to 11
-                      let val = e.target.value.replace(/\D/g, '');
-                      if (val.length > 0 && !val.startsWith('09')) {
-                        val = '09' + val.replace(/^0+9?/, '').slice(0, 9);
-                      }
-                      val = val.slice(0, 11);
-                      field.onChange(val);
+                      field.onChange(e.target.value);
+                      setData(d => ({ ...d, contactNumber: e.target.value }));
                     }}
-                    icon={Phone}
                     className="bg-white/10 border-white/20 text-white"
-                    maxLength={11}
                   />
-                )}
-              </FormField>
-              <div className="flex justify-end pt-4">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="bg-blue-500 hover:bg-blue-600 border-blue-400"
-                >
-                  Next <ChevronRight className="w-4 h-4 ml-1 inline-flex items-center" />
-                </Button>
-              </div>
-            </Form>
-          </div>
+                </div>
+              )}
+            </FormField>
+            <div className="flex justify-end pt-2">
+              <Button
+                type="submit"
+                variant="primary"
+              >
+                Next <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          </Form>
         )}
 
         {/* ── Step 2: Passenger Type ── */}
         {step === 'type' && (
           <div className="px-6 py-5">
             <p className="text-sm text-white/60 mb-4">
-              Select the passenger category for <span className="font-semibold text-white">{data.owner_name}</span>:
+              Select the passenger category for <span className="font-semibold text-white">{data.ownerName}</span>:
             </p>
-            <div className="grid grid-cols-2 gap-4 mb-5">
+            <div className="grid grid-cols-2 gap-3 mb-5">
               {TYPE_OPTIONS.map(opt => (
                 <button
                   key={opt.value}
                   onClick={() => setData(d => ({ ...d, card_type: opt.value }))}
                   className={`relative rounded-2xl border-2 overflow-hidden transition-all text-left ${
                     data.card_type === opt.value
-                      ? opt.color + ' border-opacity-100 shadow-soft scale-105'
-                      : 'border-white/20 hover:border-white/30 bg-white/10 hover:scale-102'
+                      ? opt.color + ' border-opacity-100 shadow-soft'
+                      : 'border-white/20 hover:border-white/30 bg-white/10'
                   }`}
                 >
                   <img
                     src={opt.img}
                     alt={opt.label}
-                    className="w-full h-24 object-cover object-top"
+                    className="w-full h-14 object-cover object-top"
                   />
-                  <div className="px-4 py-3">
-                    <p className="text-sm font-bold text-white">{opt.label}</p>
-                    <p className="text-xs text-white/60">{opt.desc}</p>
+                  <div className="px-3 py-2">
+                    <p className="text-xs font-bold text-white">{opt.label}</p>
+                    <p className="text-[10px] text-white/60">{opt.desc}</p>
                   </div>
                   {data.card_type === opt.value && (
-                    <div className="absolute top-3 right-3 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                    <div className="absolute top-2 right-2 w-4 h-4 bg-primary-500 rounded-full flex items-center justify-center">
                       <CheckCircle className="w-3 h-3 text-white" />
                     </div>
                   )}
                 </button>
               ))}
             </div>
-            <div className="flex justify-between pt-4">
+            <div className="flex justify-between">
               <Button
                 onClick={() => setStep('info')}
                 variant="secondary"
@@ -268,9 +244,8 @@ function RegisterCardModal({
               <Button
                 onClick={handleTypeNext}
                 variant="primary"
-                className="bg-blue-500 hover:bg-blue-600 border-blue-400"
               >
-                Next <ChevronRight className="w-4 h-4 ml-1 inline-flex items-center" />
+                Next <ChevronRight className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -294,19 +269,19 @@ function RegisterCardModal({
                 {/* Name */}
                 <div className="p-3 bg-white/10 rounded-2xl border border-white/20">
                   <p className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-0.5">Full Name</p>
-                  <p className="font-semibold text-white text-sm truncate">{data.owner_name}</p>
+                  <p className="font-semibold text-white text-sm truncate">{data.ownerName}</p>
                 </div>
                 {/* Contact */}
                 <div className="p-3 bg-white/10 rounded-2xl border border-white/20">
                   <p className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-0.5">Contact Number</p>
-                  <p className="font-semibold text-white text-sm">{data.contact_number}</p>
+                  <p className="font-semibold text-white text-sm">{data.contactNumber}</p>
                 </div>
                 {/* Type */}
                 <div className="p-3 bg-white/10 rounded-2xl border border-white/20">
                   <p className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-0.5">Passenger Type</p>
-                  <p className="text-sm font-semibold text-white capitalize">
-                    {data.card_type.replace('_', ' ')}
-                  </p>
+                  <span className={`inline-block px-2 py-0.5 rounded-lg text-xs font-bold ${selectedType.color}`}>
+                    {data.card_type}
+                  </span>
                 </div>
                 {/* Balance */}
                 <div className="p-3 bg-emerald-500/20 rounded-2xl border border-emerald-500/30">
@@ -331,9 +306,9 @@ function RegisterCardModal({
                     className="w-full object-cover"
                   />
                   {/* Name overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-2 py-1.5">
+                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/70 to-transparent px-2 py-1.5">
                     <p className="text-white text-[9px] font-bold truncate leading-tight">
-                      {data.owner_name.toUpperCase()}
+                      {data.ownerName.toUpperCase()}
                     </p>
                     <p className="text-white/60 text-[8px] font-mono truncate">
                       {previewCardId}
@@ -364,7 +339,7 @@ function RegisterCardModal({
               </div>
             )}
 
-            <div className="flex justify-between pt-4">
+            <div className="flex justify-between">
               <Button
                 onClick={() => setStep('type')}
                 variant="secondary"
@@ -375,12 +350,11 @@ function RegisterCardModal({
                 onClick={handleSubmit}
                 disabled={issueMutation.isPending}
                 variant="primary"
-                className="bg-blue-500 hover:bg-blue-600 border-blue-400"
               >
                 {issueMutation.isPending ? (
                   <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                 ) : (
-                  <CheckCircle className="w-4 h-4 mr-1 inline-flex items-center" />
+                  <CheckCircle className="w-4 h-4" />
                 )}
                 {issueMutation.isPending ? 'Issuing…' : 'Issue Card'}
               </Button>
@@ -413,8 +387,7 @@ function EditCardModal({
   const updateMutation = useMutation({
     mutationFn: (updates: { owner_name: string; contact_number: string }) => 
       apiCalls.updateQRCard(card.id, updates),
-    onSuccess: (_data: any, updates: { owner_name: string; contact_number: string }) => {
-      AuditService.logQRCardUpdated(card.id, card.card_uid, `name=${updates.owner_name}, contact=${updates.contact_number}`);
+    onSuccess: () => {
       toast.success('Card updated successfully!');
       onSuccess();
       onClose();
@@ -427,14 +400,9 @@ function EditCardModal({
 
   const handleSubmit = (values: Record<string, any>) => {
     setError(null);
-    const phMobileRegex = /^09\d{9}$/;
-    if (!phMobileRegex.test(values.contact_number?.trim())) {
-      setError('Enter a valid PH mobile number (e.g. 09171234567)');
-      return;
-    }
     updateMutation.mutate({
-      owner_name: values.owner_name,
-      contact_number: values.contact_number.trim(),
+      owner_name: values.ownerName,
+      contact_number: values.contactNumber,
     });
   };
 
@@ -449,92 +417,81 @@ function EditCardModal({
         </div>
         <Form
           initialValues={{
-            owner_name: formData.owner_name,
-            contact_number: formData.contact_number,
+            ownerName: formData.ownerName,
+            contactNumber: formData.contactNumber,
           }}
           onSubmit={handleSubmit}
         >
-          <div className="px-6 py-5 space-y-4">
-            <FormField name="card_uid" label="Card ID">
-              {() => (
-                <Input
-                  type="text"
-                  value={card.card_uid}
-                  disabled
-                  className="bg-white/10 font-mono text-white/60"
-                />
-              )}
-            </FormField>
-            <FormField name="owner_name" label="Full Name" required>
-              {(field) => (
-                <Input
-                  type="text"
-                  required
-                  value={field.value}
-                  onChange={(e) => {
-                    field.onChange(e.target.value);
-                    setFormData(d => ({ ...d, owner_name: e.target.value }));
-                  }}
-                  className="bg-white/10 text-white"
-                />
-              )}
-            </FormField>
-            <FormField name="contact_number" label="Contact Number" required>
-              {(field) => (
-                <Input
-                  type="tel"
-                  required
-                  placeholder="e.g. 09171234567"
-                  value={field.value}
-                  onChange={(e) => {
-                    let val = e.target.value.replace(/\D/g, '');
-                    if (val.length > 0 && !val.startsWith('09')) {
-                      val = '09' + val.replace(/^0+9?/, '').slice(0, 9);
-                    }
-                    val = val.slice(0, 11);
-                    field.onChange(val);
-                    setFormData(d => ({ ...d, contact_number: val }));
-                  }}
-                  className="bg-white/10 text-white"
-                  maxLength={11}
-                />
-              )}
-            </FormField>
-            <FormField name="card_type" label="Passenger Type">
-              {() => (
-                <Input
-                  type="text"
-                  value={formData.card_type}
-                  disabled
-                  className="bg-white/10 text-white/60"
-                />
-              )}
-            </FormField>
-            {error && (
-              <div className="p-3 bg-red-500/20 border border-red-500/30 rounded-xl text-xs text-red-400">
-                {error}
-              </div>
+          <FormField name="card_uid" label="Card ID">
+            {() => (
+              <Input
+                type="text"
+                value={card.card_uid}
+                disabled
+                className="bg-white/10 font-mono text-white/60"
+              />
             )}
-            <div className="flex gap-3 pt-2">
-              <Button
-                type="button"
-                onClick={onClose}
-                variant="secondary"
-                fullWidth
-                className="bg-white/10 hover:bg-white/20 border-white/20 text-white"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                disabled={updateMutation.isPending}
-                variant="primary"
-                fullWidth
-                className="bg-blue-500 hover:bg-blue-600 border-blue-400 text-white"
-              >
-                {updateMutation.isPending ? 'Updating...' : 'Save Changes'}
-              </Button>
+          </FormField>
+          <FormField name="ownerName" label="Full Name" required>
+            {(field) => (
+              <Input
+                type="text"
+                required
+                value={field.value}
+                onChange={(e) => {
+                  field.onChange(e.target.value);
+                  setFormData(d => ({ ...d, ownerName: e.target.value }));
+                }}
+                className="bg-white/10 text-white"
+              />
+            )}
+          </FormField>
+          <FormField name="contactNumber" label="Contact Number" required>
+            {(field) => (
+              <Input
+                type="tel"
+                required
+                value={field.value}
+                onChange={(e) => {
+                  field.onChange(e.target.value);
+                  setFormData(d => ({ ...d, contactNumber: e.target.value }));
+                }}
+                className="bg-white/10 text-white"
+              />
+            )}
+          </FormField>
+          <FormField name="card_type" label="Passenger Type">
+            {() => (
+              <Input
+                type="text"
+                value={formData.card_type}
+                disabled
+                className="bg-white/10 text-white/60"
+              />
+            )}
+          </FormField>
+          {error && (
+            <div className="p-3 bg-red-500/20 border border-red-500/30 rounded-xl text-xs text-red-400">
+              {error}
             </div>
+          )}
+          <div className="flex gap-3 pt-2">
+            <Button
+              type="button"
+              onClick={onClose}
+              variant="secondary"
+              fullWidth
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              disabled={updateMutation.isPending}
+              variant="primary"
+              fullWidth
+            >
+              {updateMutation.isPending ? 'Updating...' : 'Save Changes'}
+            </Button>
           </div>
         </Form>
       </div>
@@ -576,7 +533,6 @@ function DeleteCardModal({
           onClick={onClose}
           variant="secondary"
           fullWidth
-          className="bg-white/10 hover:bg-white/20 text-white border border-white/20"
         >
           Cancel
         </Button>
@@ -584,7 +540,6 @@ function DeleteCardModal({
           onClick={onConfirm}
           variant="danger"
           fullWidth
-          className="bg-red-500 hover:bg-red-600 text-white border border-red-400"
         >
           Delete
         </Button>
@@ -593,7 +548,7 @@ function DeleteCardModal({
   );
 }
 
-// ── Replace card form ───────────────────────────────────────────────────────
+// ── Replace card confirm ───────────────────────────────────────────────────
 
 function ReplaceCardModal({
   card,
@@ -602,93 +557,36 @@ function ReplaceCardModal({
 }: {
   card: QRCard;
   onClose: () => void;
-  onConfirm: (newCardUid: string) => void;
+  onConfirm: (newCardData?: any) => void;
 }) {
-  const [newCardUid, setNewCardUid] = useState('');
-  const [error, setError] = useState('');
-
-  const handleConfirm = () => {
-    const trimmed = newCardUid.trim();
-    if (!trimmed) {
-      setError('Please enter the new Card UID.');
-      return;
-    }
-    if (trimmed === card.card_uid) {
-      setError('New Card UID must be different from the current one.');
-      return;
-    }
-    setError('');
-    onConfirm(trimmed);
-  };
-
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="glass-card w-full max-w-md border border-white/20 overflow-hidden">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/20">
-          <h2 className="text-base font-bold text-white">Replace Card</h2>
-          <button onClick={onClose} className="p-2 rounded-xl hover:bg-white/10 text-white/60 border border-white/20">
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-        <div className="px-6 py-5 space-y-4">
-          {/* Current card info */}
-          <div className="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
-            <p className="text-xs font-semibold text-white/40 uppercase tracking-wider">Current Card</p>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-white/60">Card ID</span>
-              <span className="font-mono text-sm font-bold text-white">{card.card_uid}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-white/60">Owner</span>
-              <span className="text-sm text-white">{card.owner_name}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-white/60">Balance</span>
-              <span className="text-sm text-emerald-400 font-semibold">₱{(card.balance ?? 0).toFixed(2)}</span>
-            </div>
-          </div>
-
-          <div className="p-3 bg-orange-500/10 border border-orange-500/30 rounded-xl">
-            <p className="text-xs text-orange-300">
-              The current card will be marked as <strong>replaced</strong> and the balance will transfer to the new card.
-            </p>
-          </div>
-
-          {/* New card UID input */}
-          <div>
-            <label className="block text-sm font-medium text-white/70 mb-2">New Card UID <span className="text-red-400">*</span></label>
-            <input
-              type="text"
-              placeholder="Scan or enter new card UID"
-              value={newCardUid}
-              onChange={(e) => { setNewCardUid(e.target.value); setError(''); }}
-              className="w-full px-4 py-2.5 bg-white/10 border border-white/20 rounded-xl text-white font-mono placeholder-white/30 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
-              autoFocus
-            />
-            {error && <p className="text-xs text-red-400 mt-1">{error}</p>}
-          </div>
-
-          <div className="flex gap-3 pt-1">
-            <Button
-              onClick={onClose}
-              variant="secondary"
-              fullWidth
-              className="bg-white/10 hover:bg-white/20 border-white/20 text-white"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleConfirm}
-              variant="primary"
-              fullWidth
-              className="bg-orange-500 hover:bg-orange-600 border-orange-400 text-white"
-            >
-              Replace Card
-            </Button>
-          </div>
-        </div>
+    <Modal
+      isOpen={!!card}
+      onClose={onClose}
+      title="Replace Card"
+    >
+      <p className="text-sm text-white/60 mb-5">
+        Card <span className="font-mono font-bold text-white">{card.card_uid}</span> will be
+        marked as replaced and a new card will be issued for{' '}
+        <span className="font-semibold text-white">{card.owner_name}</span>.
+      </p>
+      <div className="flex gap-3">
+        <Button
+          onClick={onClose}
+          variant="secondary"
+          fullWidth
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={onConfirm}
+          variant="primary"
+          fullWidth
+        >
+          Confirm
+        </Button>
       </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -697,7 +595,6 @@ function ReplaceCardModal({
 export default function QRCards() {
   const navigate = useNavigate();
   const [showRegister, setShowRegister]   = useState(false);
-  const [showTempModal, setShowTempModal] = useState(false);
   const [newCard, setNewCard]             = useState<QRCard | null>(null);
   const [replaceTarget, setReplaceTarget] = useState<QRCard | null>(null);
   const [viewCard, setViewCard]           = useState<QRCard | null>(null);
@@ -711,36 +608,15 @@ export default function QRCards() {
     queryFn: apiCalls.getQRCards,
   });
 
-  // Filter out temporary cards but keep disabled/deactivated cards
-  const filteredCards = cards?.filter((c: QRCard) => {
-    // Exclude temporary cards by card_uid pattern (TRC-, TPC-, TSCC-, etc.)
-    if (c.card_uid && (c.card_uid.startsWith('TRC-') || c.card_uid.startsWith('TPC-') || c.card_uid.startsWith('TSCC-'))) return false;
-
-    // Exclude temporary cards by owner_name
-    if (c.owner_name === 'Temporary Card') return false;
-
-    // Exclude cards with TEMP in card_uid
-    if (c.card_uid && c.card_uid.includes('TEMP')) return false;
-
-    return true;
-  }) || [];
-
-  // Separate active and disabled cards for display
-  const activeCards = filteredCards.filter((c: QRCard) => c.status === 'active');
-  const disabledCards = filteredCards.filter((c: QRCard) => c.status !== 'active');
-
-  const { data: tempCards, isLoading: isLoadingTemp, error: tempError } = useQuery({
+  const { data: tempCards } = useQuery({
     queryKey: ['temporaryQRCards'],
     queryFn: apiCalls.getTemporaryQRCards,
   });
 
-  // Log tempCards for debugging
-  console.log('tempCards:', tempCards);
-  console.log('tempError:', tempError);
-
   // Calculate card counts
   const cardCounts = useMemo(() => {
-    // Count only active cards for summary
+    // Exclude temporary cards from passenger type counts
+    const activeCards = cards?.filter((c: QRCard) => c.status === 'active') || [];
     const regularCount = activeCards.filter((c: QRCard) => c.card_type === 'regular').length || 0;
     const studentCount = activeCards.filter((c: QRCard) => c.card_type === 'student').length || 0;
     const seniorCount = activeCards.filter((c: QRCard) => c.card_type === 'senior_citizen').length || 0;
@@ -757,7 +633,7 @@ export default function QRCards() {
       pwd: pwdCount,
       total: totalCount,
     };
-  }, [activeCards, tempCards]);
+  }, [cards, tempCards]);
 
   const activateMutation = useMutation({
     mutationFn: (cardUid: string) => apiCalls.activateQR(cardUid),
@@ -795,8 +671,7 @@ export default function QRCards() {
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => apiCalls.deleteQRCard(id),
-    onSuccess: (_data: any, id: string) => {
-      if (deleteCard) AuditService.logQRCardDeleted(id, deleteCard.card_uid);
+    onSuccess: () => {
       toast.success('Card deleted successfully!');
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
       setDeleteCard(null);
@@ -806,25 +681,11 @@ export default function QRCards() {
     },
   });
 
-  const generateTempMutation = useMutation({
-    mutationFn: (passengerType: 'Regular' | 'Student' | 'Senior Citizen' | 'PWD') =>
-      apiCalls.createTemporaryQRCard(passengerType),
-    onSuccess: () => {
-      toast.success('Temporary QR Card generated successfully!');
-      queryClient.invalidateQueries({ queryKey: ['temporaryQRCards'] });
-      queryClient.invalidateQueries({ queryKey: ['qrCards'] });
-      setShowTempModal(false);
-    },
-    onError: (err: Error) => {
-      toast.error(`Failed to generate temporary card: ${err.message}`);
-    },
-  });
-
   const handleRegistered = () => {
     queryClient.invalidateQueries({ queryKey: ['qrCards'] });
     queryClient.invalidateQueries({ queryKey: ['dashboardStats'] });
     setShowRegister(false);
-    // Stay on current page instead of navigating away
+    navigate('/');  // Navigate to dashboard
   };
 
   if (isLoading) {
@@ -836,35 +697,25 @@ export default function QRCards() {
   }
 
   return (
-    <div className="h-full overflow-y-auto pr-1">
-    <div className="flex flex-col">
+    <div>
       {/* Page header */}
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-white">QR Card Management</h1>
-        <div className="flex gap-3">
-          <button
-            onClick={() => setShowTempModal(true)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl text-sm font-semibold transition-colors shadow-soft border border-orange-400"
-          >
-            <Ticket className="w-4 h-4" />
-            Create Temporary Card
-          </button>
-          <button
-            onClick={() => setShowRegister(true)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-2xl text-sm font-semibold transition-colors shadow-soft border border-blue-400"
-          >
-            <Plus className="w-4 h-4" />
-            Register New Card
-          </button>
-        </div>
+        <button
+          onClick={() => setShowRegister(true)}
+          className="flex items-center gap-2 px-4 py-2.5 bg-primary-500 hover:bg-primary-600 text-white rounded-2xl text-sm font-semibold transition-colors shadow-soft border border-primary-400"
+        >
+          <Plus className="w-4 h-4" />
+          Register New Card
+        </button>
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
         {/* Total Cards */}
         <button
           onClick={() => setSelectedFilter(selectedFilter === 'all' ? null : 'all')}
-          className={`bg-gradient-to-br from-gray-600 to-gray-700 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
+          className={`bg-linear-to-br from-gray-600 to-gray-700 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
             selectedFilter === 'all' ? 'ring-2 ring-white ring-offset-2 ring-offset-gray-700' : ''
           }`}
         >
@@ -875,24 +726,10 @@ export default function QRCards() {
           <p className="text-xs font-medium opacity-90">Total Cards</p>
         </button>
 
-        {/* Disabled Cards */}
-        <button
-          onClick={() => setSelectedFilter(selectedFilter === 'disabled' ? null : 'disabled')}
-          className={`bg-gradient-to-br from-red-600 to-red-700 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
-            selectedFilter === 'disabled' ? 'ring-2 ring-white ring-offset-2 ring-offset-red-700' : ''
-          }`}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <PowerOff className="w-5 h-5 opacity-80" />
-            <span className="text-2xl font-bold">{disabledCards.length}</span>
-          </div>
-          <p className="text-xs font-medium opacity-90">Disabled Cards</p>
-        </button>
-
         {/* Temporary Cards */}
         <button
           onClick={() => setSelectedFilter(selectedFilter === 'temporary' ? null : 'temporary')}
-          className={`bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
+          className={`bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
             selectedFilter === 'temporary' ? 'ring-2 ring-white ring-offset-2 ring-offset-orange-600' : ''
           }`}
         >
@@ -905,23 +742,23 @@ export default function QRCards() {
 
         {/* Regular Cards */}
         <button
-          onClick={() => setSelectedFilter(selectedFilter === 'regular' ? null : 'regular')}
-          className={`bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
-            selectedFilter === 'regular' ? 'ring-2 ring-white ring-offset-2 ring-offset-blue-600' : ''
+          onClick={() => setSelectedFilter(selectedFilter === 'Regular' ? null : 'Regular')}
+          className={`bg-linear-to-br from-blue-500 to-blue-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
+            selectedFilter === 'Regular' ? 'ring-2 ring-white ring-offset-2 ring-offset-blue-600' : ''
           }`}
         >
           <div className="flex items-center justify-between mb-2">
             <CreditCard className="w-5 h-5 opacity-80" />
             <span className="text-2xl font-bold">{cardCounts.regular}</span>
-          </div>
+ </div>
           <p className="text-xs font-medium opacity-90">Regular Cards</p>
         </button>
 
         {/* Student Cards */}
         <button
-          onClick={() => setSelectedFilter(selectedFilter === 'student' ? null : 'student')}
-          className={`bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
-            selectedFilter === 'student' ? 'ring-2 ring-white ring-offset-2 ring-offset-green-600' : ''
+          onClick={() => setSelectedFilter(selectedFilter === 'Student' ? null : 'Student')}
+          className={`bg-linear-to-br from-green-500 to-green-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
+            selectedFilter === 'Student' ? 'ring-2 ring-white ring-offset-2 ring-offset-green-600' : ''
           }`}
         >
           <div className="flex items-center justify-between mb-2">
@@ -933,9 +770,9 @@ export default function QRCards() {
 
         {/* PWD Cards */}
         <button
-          onClick={() => setSelectedFilter(selectedFilter === 'pwd' ? null : 'pwd')}
-          className={`bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
-            selectedFilter === 'pwd' ? 'ring-2 ring-white ring-offset-2 ring-offset-purple-600' : ''
+          onClick={() => setSelectedFilter(selectedFilter === 'PWD' ? null : 'PWD')}
+          className={`bg-linear-to-br from-purple-500 to-purple-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
+            selectedFilter === 'PWD' ? 'ring-2 ring-white ring-offset-2 ring-offset-purple-600' : ''
           }`}
         >
           <div className="flex items-center justify-between mb-2">
@@ -947,9 +784,9 @@ export default function QRCards() {
 
         {/* Senior Citizen Cards */}
         <button
-          onClick={() => setSelectedFilter(selectedFilter === 'senior_citizen' ? null : 'senior_citizen')}
-          className={`bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
-            selectedFilter === 'senior_citizen' ? 'ring-2 ring-white ring-offset-2 ring-offset-amber-600' : ''
+          onClick={() => setSelectedFilter(selectedFilter === 'Senior Citizen' ? null : 'Senior Citizen')}
+          className={`bg-linear-to-br from-amber-500 to-amber-600 rounded-2xl p-4 text-white shadow-soft transition-all hover:scale-105 border border-white/20 ${
+            selectedFilter === 'Senior Citizen' ? 'ring-2 ring-white ring-offset-2 ring-offset-amber-600' : ''
           }`}
         >
           <div className="flex items-center justify-between mb-2">
@@ -961,64 +798,53 @@ export default function QRCards() {
       </div>
 
       {/* Cards list */}
-      <div className="flex-1 overflow-y-auto">
-        {(() => {
-          let displayCards = filteredCards || [];
-          if (selectedFilter === 'temporary') {
-            displayCards = tempCards || [];
-          } else if (selectedFilter === 'all') {
-            // Show all regular cards + temporary cards
-            displayCards = [...(filteredCards || []), ...(tempCards || [])];
-          } else if (selectedFilter === 'disabled') {
-            // Show only disabled/deactivated/replaced/lost cards
-            displayCards = disabledCards;
-          } else if (selectedFilter) {
-            // Filter by card type, show only active cards of that type
-            displayCards = filteredCards?.filter((c: QRCard) => c.card_type === selectedFilter.toLowerCase() && c.status === 'active') || [];
-          } else {
-            // Default: show only active regular cards + temporary cards
-            displayCards = [...(activeCards || []), ...(tempCards || [])];
-          }
+      {(() => {
+        let displayCards = cards || [];
+        if (selectedFilter === 'temporary') {
+          displayCards = tempCards || [];
+        } else if (selectedFilter && selectedFilter !== 'all') {
+          displayCards = cards?.filter((c: QRCard) => c.card_type === selectedFilter) || [];
+        }
 
-          if (displayCards.length === 0) {
-            return (
-              <div className="flex flex-col items-center justify-center h-64 text-white/60">
-                <CreditCard className="w-12 h-12 mb-3 opacity-40" />
-                <p className="font-medium">No cards found</p>
-                <p className="text-sm mt-1">Click "Register New Card" to get started</p>
-              </div>
-            );
-          }
-
+        if (displayCards.length === 0) {
           return (
-            <div className="glass-card overflow-hidden">
-              <table className="w-full">
-                <thead className="bg-white/10 border-b border-white/20 sticky top-0">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Card ID</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Passenger Name</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Type</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Balance</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Issued Date</th>
-                    <th className="px-6 py-3 text-right text-xs font-semibold text-white/60 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10">
-                  {displayCards.map((card: QRCard) => (
-                    <tr key={card.id} className="hover:bg-white/10 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-sm font-medium text-white">{card.card_uid}</span>
-                          {card.status === 'deactivated' && (
-                            <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-orange-500/20 text-orange-400">TEMP</span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <p className="text-sm font-medium text-white">{card.owner_name}</p>
-                        <p className="text-xs text-white/60">{card.contact_number}</p>
-                      </td>
+            <div className="flex flex-col items-center justify-center h-64 text-white/60">
+              <CreditCard className="w-12 h-12 mb-3 opacity-40" />
+              <p className="font-medium">No cards found</p>
+              <p className="text-sm mt-1">Click "Register New Card" to get started</p>
+            </div>
+          );
+        }
+
+        return (
+          <div className="glass-card overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-white/10 border-b border-white/20">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Card ID</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Passenger Name</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Type</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Balance</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-white/60 uppercase tracking-wider">Issued Date</th>
+                  <th className="px-6 py-3 text-right text-xs font-semibold text-white/60 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {displayCards.map((card: QRCard) => (
+                  <tr key={card.id} className="hover:bg-white/10 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-sm font-medium text-white">{card.card_uid}</span>
+                        {card.status === 'deactivated' && (
+                          <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-orange-500/20 text-orange-400">TEMP</span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <p className="text-sm font-medium text-white">{card.owner_name}</p>
+                      <p className="text-xs text-white/60">{card.contact_number}</p>
+                    </td>
                     <td className="px-6 py-4">
                       <span className={`inline-block px-2 py-1 rounded-lg text-xs font-medium ${
                         card.card_type === 'regular' ? 'bg-blue-500/20 text-blue-400' :
@@ -1043,7 +869,7 @@ export default function QRCards() {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm text-white/60">{new Date(card.created_at).toLocaleDateString()}</p>
+                      <p className="text-sm text-white/60">{new Date(card.issuedAt).toLocaleDateString()}</p>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
@@ -1099,9 +925,8 @@ export default function QRCards() {
               </tbody>
             </table>
           </div>
-          );
-        })()}
-      </div>
+        );
+      })()}
 
       {/* Register modal */}
       {showRegister && (
@@ -1141,10 +966,7 @@ export default function QRCards() {
         <ReplaceCardModal
           card={replaceTarget}
           onClose={() => setReplaceTarget(null)}
-          onConfirm={(newCardUid: string) => replaceMutation.mutate({
-            oldCardId: replaceTarget.card_uid,
-            newCardData: { status: 'replaced', card_uid: newCardUid }
-          })}
+          onConfirm={(newCardData: any) => replaceMutation.mutate({ oldCardId: replaceTarget.cardId, newCardData })}
         />
       )}
 
@@ -1162,221 +984,9 @@ export default function QRCards() {
         <DeleteCardModal
           card={deleteCard}
           onClose={() => setDeleteCard(null)}
-          onConfirm={() => deleteMutation.mutate(deleteCard.id)}
-        />
-      )}
-
-      {/* Temporary Card Modal */}
-      {showTempModal && (
-        <TempCardModal
-          onClose={() => setShowTempModal(false)}
-          onGenerate={(passengerType) => generateTempMutation.mutate(passengerType)}
-          isGenerating={generateTempMutation.isPending}
+          onConfirm={() => deleteMutation.mutate(deleteCard.cardId)}
         />
       )}
     </div>
-    </div>
-  );
-}
-
-// ── Temporary Card Modal ─────────────────────────────────────────────────────
-
-const TEMP_TEMPLATES: Record<string, string> = {
-  'Regular': tempRegularCard,
-  'Student': tempStudentCard,
-  'Senior Citizen': tempSeniorCard,
-  'PWD': tempPwdCard,
-};
-
-function formatCardType(cardType: string): string {
-  if (!cardType) return 'Regular';
-  return cardType
-    .split('_')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
-
-function useTempCardCanvas(card: QRCard, qrRef: React.RefObject<HTMLDivElement | null>) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const timer = setTimeout(() => {
-      const img = new Image();
-      const templateKey = formatCardType(card.card_type);
-      img.src = TEMP_TEMPLATES[templateKey] || tempRegularCard;
-      img.onload = () => {
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        const W = canvas.width;
-        const H = canvas.height;
-
-        // Draw card template background
-        ctx.drawImage(img, 0, 0);
-
-        // Draw QR code on the right side
-        const qrCanvas = qrRef.current?.querySelector('canvas') as HTMLCanvasElement | null;
-        if (qrCanvas) {
-          const qrSize = Math.round(W * 0.36);
-          const qrX = Math.round(W * 0.58);
-          const qrY = Math.round(H * 0.15);
-
-          // White background for QR code
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(qrX, qrY, qrSize, qrSize);
-
-          ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
-        }
-
-        // Draw card ID below QR code
-        const cardIdY = Math.round(H * 0.88);
-        const cardIdX = Math.round(W * 0.78);
-        const fontSize = Math.round(W * 0.035);
-        
-        // Get color based on passenger type
-        const colorMap: Record<string, string> = {
-          'Regular': '#1362e2',
-          'Student': '#1fb451',
-          'Senior Citizen': '#961995',
-          'PWD': '#f70b0e',
-        };
-        const displayType = formatCardType(card.card_type);
-        const cardIdColor = colorMap[displayType] || '#1362e2';
-        
-        // Draw background rectangle to hide existing text
-        ctx.font = `800 ${fontSize}px 'Courier New', monospace`;
-        const textWidth = ctx.measureText(card.card_uid).width;
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(
-          cardIdX - textWidth / 2 - 15,
-          cardIdY - fontSize - 8,
-          textWidth + 30,
-          fontSize + 20
-        );
-        
-        // Draw card ID text
-        ctx.fillStyle = cardIdColor;
-        ctx.textAlign = 'center';
-        ctx.fillText(
-          card.card_uid,
-          cardIdX,
-          cardIdY
-        );
-      };
-    }, 120);
-
-    return () => clearTimeout(timer);
-  }, [card, qrRef]);
-
-  return canvasRef;
-}
-
-function TempCardModal({
-  onClose,
-  onGenerate,
-  isGenerating,
-}: {
-  onClose: () => void;
-  onGenerate: (passengerType: 'Regular' | 'Student' | 'Senior Citizen' | 'PWD') => void;
-  isGenerating: boolean;
-}) {
-  const [passengerType, setPassengerType] = useState<'Regular' | 'Student' | 'Senior Citizen' | 'PWD'>('Regular');
-  const qrRef = useRef<HTMLDivElement>(null);
-  
-  // Preview card data
-  const typeIndicators: Record<string, string> = {
-    'Regular': 'TRC',
-    'Student': 'TSC',
-    'Senior Citizen': 'TSCC',
-    'PWD': 'TPC'
-  };
-  const indicator = typeIndicators[passengerType] || 'TRC';
-  const randomNum = Math.floor(10000000 + Math.random() * 90000000).toString();
-  const formattedNum = `${randomNum.slice(0, 3)}-${randomNum.slice(3, 5)}-${randomNum.slice(5)}`;
-  const previewCardId = `${indicator}-${formattedNum}`;
-  
-  const previewCard: QRCard = {
-    id: 'preview',
-    card_uid: previewCardId,
-    owner_name: 'Temporary Card',
-    card_type: passengerType.toLowerCase().replace(' ', '_') as any,
-    contact_number: '',
-    status: 'active',
-    created_at: new Date().toISOString(),
-    balance: 0,
-    purchase_price: 0,
-  };
-  
-  const canvasRef = useTempCardCanvas(previewCard, qrRef);
-
-  return (
-    <Modal
-      isOpen={true}
-      onClose={onClose}
-      title="Generate Temporary Card"
-    >
-      <div className="flex gap-12 mb-6">
-        {/* Left side - Form */}
-        <div className="flex-1 space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">Passenger Type</label>
-            <Select
-              value={passengerType}
-              onChange={(value) => setPassengerType(value as any)}
-              options={[
-                { value: 'Regular', label: 'Regular' },
-                { value: 'Student', label: 'Student' },
-                { value: 'Senior Citizen', label: 'Senior Citizen' },
-                { value: 'PWD', label: 'PWD' },
-              ]}
-              className="bg-white/10 border-white/20 text-white"
-            />
-          </div>
-          
-          <p className="text-sm text-white/60">
-            This is a temporary QR card that can be reused.
-            The passenger will hold the card until the end of their trip.
-          </p>
-        </div>
-        
-        {/* Right side - Card Preview */}
-        <div className="flex-1 flex flex-col items-center justify-center ml-12">
-          <div ref={qrRef} className="absolute opacity-0 pointer-events-none">
-            <QRCodeCanvas value={previewCard.card_uid} size={512} level="H" includeMargin={true} />
-          </div>
-          
-          <canvas
-            ref={canvasRef}
-            className="w-full rounded-2xl shadow-lg"
-            style={{ imageRendering: 'crisp-edges' }}
-          />
-          
-          <p className="text-xs text-white/40 mt-2">Card Preview</p>
-        </div>
-      </div>
-      
-      <div className="flex gap-3">
-        <Button
-          onClick={onClose}
-          variant="secondary"
-          fullWidth
-        >
-          Cancel
-        </Button>
-        <Button
-          onClick={() => onGenerate(passengerType)}
-          disabled={isGenerating}
-          variant="primary"
-          fullWidth
-          className="bg-green-500 hover:bg-green-600 border-green-400"
-        >
-          {isGenerating ? 'Generating...' : 'Generate Card'}
-        </Button>
-      </div>
-    </Modal>
   );
 }

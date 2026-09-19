@@ -1,15 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiCalls } from "../../lib/api";
-import { supabase } from '@commutai/supabase';
 import type { Transaction, QRCard } from '../types';
-import {
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  LineChart, Line, AreaChart, Area,
-  BarChart, Bar, Cell
+import { 
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
+  LineChart, Line, PieChart, Pie, Cell, AreaChart, Area 
 } from 'recharts';
-import {
-  TrendingUp, CreditCard, DollarSign, Users,
-  Download
+import { 
+  TrendingUp, CreditCard, DollarSign, 
+  Download 
 } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { Calendar } from 'lucide-react';
@@ -28,18 +26,6 @@ export default function Reports() {
   const { data: transactions } = useQuery({
     queryKey: ['transactions'],
     queryFn: apiCalls.getTransactions,
-  });
-
-  const { data: reservations } = useQuery({
-    queryKey: ['cardReservations'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('card_reservations')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (error) throw error;
-      return data;
-    },
   });
 
   // Calculate card type distribution
@@ -133,24 +119,12 @@ export default function Reports() {
     { name: 'Active', value: cards?.filter((c: QRCard) => c.status === 'active').length || 0, color: '#10b981' },
     { name: 'Deactivated', value: cards?.filter((c: QRCard) => c.status === 'deactivated').length || 0, color: '#ef4444' },
     { name: 'Lost', value: cards?.filter((c: QRCard) => c.status === 'lost').length || 0, color: '#f97316' },
-    { name: 'Replaced', value: cards?.filter((c: QRCard) => c.status === 'replaced').length || 0, color: '#8b5cf6' },
-  ];
-
-  // Calculate reservation status distribution
-  const reservationStatusData = [
-    { name: 'Pending', value: reservations?.filter((r: any) => r.status === 'pending').length || 0, color: '#f59e0b' },
-    { name: 'Approved', value: reservations?.filter((r: any) => r.status === 'approved').length || 0, color: '#10b981' },
-    { name: 'Issued', value: reservations?.filter((r: any) => r.status === 'issued').length || 0, color: '#3b82f6' },
-    { name: 'Denied', value: reservations?.filter((r: any) => r.status === 'denied').length || 0, color: '#ef4444' },
-    { name: 'Expired', value: reservations?.filter((r: any) => r.status === 'expired').length || 0, color: '#6b7280' },
   ];
 
   // Calculate total revenue based on filtered transactions
   const totalRevenue = filteredTransactions.reduce((sum: number, t: Transaction) => sum + Math.abs(t.amount), 0);
   const totalReloads = filteredTransactions.filter((t: Transaction) => t.type === 'card_issuance').length;
   const totalCards = cards?.length || 0;
-  const totalReservations = reservations?.length || 0;
-  const pendingReservations = reservations?.filter((r: any) => r.status === 'pending').length || 0;
 
   const statCards = [
     {
@@ -171,16 +145,9 @@ export default function Reports() {
       icon: TrendingUp,
       gradient: 'from-purple-500 to-purple-600',
     },
-    {
-      title: 'Card Reservations',
-      value: `${pendingReservations}/${totalReservations}`,
-      icon: Users,
-      gradient: 'from-orange-500 to-orange-600',
-    },
   ];
 
   return (
-    <div className="h-full overflow-y-auto pr-1">
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-bold text-white">Reports & Analytics</h1>
@@ -259,25 +226,23 @@ export default function Reports() {
                   ? 'Monthly' 
                   : 'Yearly'} Transactions
           </h2>
-          <div style={{ height: 300 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis dataKey="date" stroke="rgba(255,255,255,0.6)" fontSize={12} />
-                <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'rgba(0,0,0,0.8)', 
-                    borderRadius: '12px', 
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: 'white'
-                  }}
-                  formatter={(value) => [value, 'Transactions']}
-                />
-                <Area type="monotone" dataKey="transactions" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.3} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+              <XAxis dataKey="date" stroke="rgba(255,255,255,0.6)" fontSize={12} />
+              <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} />
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'rgba(0,0,0,0.8)', 
+                  borderRadius: '12px', 
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white'
+                }}
+                formatter={(value) => [value, 'Transactions']}
+              />
+              <Area type="monotone" dataKey="transactions" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.3} />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
 
         <div className="glass-card p-6">
@@ -290,25 +255,23 @@ export default function Reports() {
                   ? 'Monthly' 
                   : 'Yearly'} Revenue
           </h2>
-          <div style={{ height: 300 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis dataKey="date" stroke="rgba(255,255,255,0.6)" fontSize={12} />
-                <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'rgba(0,0,0,0.8)', 
-                    borderRadius: '12px', 
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: 'white'
-                  }}
-                  formatter={(value) => [`₱${value}`, 'Revenue']}
-                />
-                <Line type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={3} dot={{ fill: '#10b981', r: 5 }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+              <XAxis dataKey="date" stroke="rgba(255,255,255,0.6)" fontSize={12} />
+              <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} />
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'rgba(0,0,0,0.8)', 
+                  borderRadius: '12px', 
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white'
+                }}
+                formatter={(value) => [`₱${value}`, 'Revenue']}
+              />
+              <Line type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={3} dot={{ fill: '#10b981', r: 5 }} />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       </div>
 
@@ -316,127 +279,121 @@ export default function Reports() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div className="glass-card p-6">
           <h2 className="text-xl font-semibold text-white mb-6">Card Type Distribution</h2>
-          <div style={{ height: 250 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={cardTypeData} barCategoryGap="30%">
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                <XAxis dataKey="name" stroke="rgba(255,255,255,0.6)" fontSize={11} tick={{ fill: 'rgba(255,255,255,0.7)' }} />
-                <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} tick={{ fill: 'rgba(255,255,255,0.6)' }} allowDecimals={false} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'rgba(0,0,0,0.85)',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: 'white'
-                  }}
-                  formatter={(value) => [value, 'Cards']}
-                />
-                <Bar dataKey="value" radius={[8, 8, 0, 0]} name="Cards">
-                  {cardTypeData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Pie
+                data={cardTypeData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {cardTypeData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'rgba(0,0,0,0.8)', 
+                  borderRadius: '12px', 
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white'
+                }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="grid grid-cols-2 gap-2 mt-4">
+            {cardTypeData.map((item) => (
+              <div key={item.name} className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+                <span className="text-xs text-white/60">{item.name}: {item.value}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="glass-card p-6">
           <h2 className="text-xl font-semibold text-white mb-6">Transaction Types</h2>
-          <div style={{ height: 250 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={transactionTypeData} barCategoryGap="40%">
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                <XAxis dataKey="name" stroke="rgba(255,255,255,0.6)" fontSize={11} tick={{ fill: 'rgba(255,255,255,0.7)' }} />
-                <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} tick={{ fill: 'rgba(255,255,255,0.6)' }} allowDecimals={false} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'rgba(0,0,0,0.85)',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: 'white'
-                  }}
-                  formatter={(value) => [value, 'Transactions']}
-                />
-                <Bar dataKey="value" radius={[8, 8, 0, 0]} name="Transactions">
-                  {transactionTypeData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </div>
-
-      {/* Charts Row 3 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Card Status Chart */}
-        <div className="glass-card p-6">
-          <h2 className="text-xl font-semibold text-white mb-6">Card Status Distribution</h2>
-          <div style={{ height: 250 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={cardStatusData} barCategoryGap="30%">
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                <XAxis dataKey="name" stroke="rgba(255,255,255,0.6)" fontSize={12} tick={{ fill: 'rgba(255,255,255,0.7)' }} />
-                <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} tick={{ fill: 'rgba(255,255,255,0.6)' }} allowDecimals={false} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'rgba(0,0,0,0.85)',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: 'white'
-                  }}
-                  formatter={(value) => [value, 'Cards']}
-                />
-                <Bar dataKey="value" radius={[8, 8, 0, 0]} name="Cards">
-                  {cardStatusData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* Card Reservations Chart */}
-        <div className="glass-card p-6">
-          <h2 className="text-xl font-semibold text-white mb-6">Card Reservation Status</h2>
-          {reservationStatusData.every(d => d.value === 0) ? (
-            <div className="flex flex-col items-center justify-center text-white/40" style={{ height: 250 }}>
-              <Users className="w-10 h-10 mb-3 opacity-30" />
-              <p className="text-sm">No reservation data available</p>
-            </div>
-          ) : (
-            <>
-              <div style={{ height: 250 }}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={reservationStatusData} barCategoryGap="30%">
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                    <XAxis dataKey="name" stroke="rgba(255,255,255,0.6)" fontSize={11} tick={{ fill: 'rgba(255,255,255,0.7)' }} />
-                    <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} tick={{ fill: 'rgba(255,255,255,0.6)' }} allowDecimals={false} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'rgba(0,0,0,0.85)',
-                        borderRadius: '12px',
-                        border: '1px solid rgba(255,255,255,0.2)',
-                        color: 'white'
-                      }}
-                      formatter={(value) => [value, 'Reservations']}
-                    />
-                    <Bar dataKey="value" radius={[8, 8, 0, 0]} name="Reservations">
-                      {reservationStatusData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Pie
+                data={transactionTypeData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {transactionTypeData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'rgba(0,0,0,0.8)', 
+                  borderRadius: '12px', 
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white'
+                }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="grid grid-cols-2 gap-2 mt-4">
+            {transactionTypeData.map((item) => (
+              <div key={item.name} className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+                <span className="text-xs text-white/60">{item.name}: {item.value}</span>
               </div>
-            </>
-          )}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Card Status Chart */}
+      <div className="glass-card p-6">
+        <h2 className="text-xl font-semibold text-white mb-6">Card Status Distribution</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Pie
+                data={cardStatusData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {cardStatusData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'rgba(0,0,0,0.8)', 
+                  borderRadius: '12px', 
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white'
+                }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className="grid grid-cols-2 gap-4">
+            {cardStatusData.map((item) => (
+              <div key={item.name} className="flex items-center gap-3 p-3 bg-white/10 rounded-xl">
+                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: item.color }} />
+                <div>
+                  <p className="text-sm font-semibold text-white">{item.name}</p>
+                  <p className="text-xs text-white/60">{item.value} cards</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

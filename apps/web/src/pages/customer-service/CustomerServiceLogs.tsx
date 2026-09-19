@@ -153,7 +153,6 @@ export default function CustomerServiceLogs() {
   }
 
   return (
-    <div className="h-full overflow-y-auto pr-1">
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
@@ -228,7 +227,6 @@ export default function CustomerServiceLogs() {
         onClose={() => setShowCreateModal(false)}
         onSuccess={() => {}}
       />
-    </div>
     </div>
   );
 }

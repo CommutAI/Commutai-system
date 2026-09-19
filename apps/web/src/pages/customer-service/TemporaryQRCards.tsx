@@ -6,7 +6,6 @@ import { useState, useRef, useEffect } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import toast from 'react-hot-toast';
 import { Button, Input, FormField, Modal, Select } from '@commutai/ui';
-import AuditService from '../../services/auditService';
 
 import tempRegularCard from './assets/TEMP-REG.png';
 import tempStudentCard from './assets/TEMP-STUD.png';
@@ -28,9 +27,8 @@ export default function TemporaryQRCards() {
 
   const generateMutation = useMutation({
     mutationFn: (passengerType: 'Regular' | 'Student' | 'Senior Citizen' | 'PWD') => 
-      apiCalls.createTemporaryQRCard(passengerType as any),
-    onSuccess: (data: any) => {
-      AuditService.logTempCardGenerated(data?.card_uid || data?.id || 'unknown', data?.card_type || 'Regular');
+      apiCalls.createTemporaryQRCard(passengerType),
+    onSuccess: () => {
       toast.success('Temporary QR Card generated successfully!');
       queryClient.invalidateQueries({ queryKey: ['temporaryQRCards'] });
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
@@ -43,8 +41,7 @@ export default function TemporaryQRCards() {
 
   const deactivateMutation = useMutation({
     mutationFn: apiCalls.deactivateTemporaryQRCard,
-    onSuccess: (_data: any, cardUid: string) => {
-      AuditService.logTempCardDeactivated(cardUid);
+    onSuccess: () => {
       toast.success('Temporary card deactivated successfully!');
       queryClient.invalidateQueries({ queryKey: ['temporaryQRCards'] });
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
@@ -57,8 +54,7 @@ export default function TemporaryQRCards() {
 
   const topUpMutation = useMutation({
     mutationFn: (cardId: string) => apiCalls.topUp(cardId, parseFloat(topUpAmount), 'cash'),
-    onSuccess: (_data: any, cardId: string) => {
-      AuditService.logTempCardTopUp(cardId, parseFloat(topUpAmount));
+    onSuccess: () => {
       toast.success(`Card topped up successfully! Amount: ₱${parseFloat(topUpAmount).toFixed(2)}`);
       queryClient.invalidateQueries({ queryKey: ['temporaryQRCards'] });
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
@@ -82,7 +78,6 @@ export default function TemporaryQRCards() {
   const totalBalance = activeCards.length * 100; // Each card has ₱100 balance
 
   return (
-    <div className="h-full overflow-y-auto pr-1">
     <div>
       <div className="flex justify-between items-center mb-6">
         <div>
@@ -144,7 +139,7 @@ export default function TemporaryQRCards() {
                     key={card.id}
                     card={card}
                     onView={() => setSelectedCard(card)}
-                    onDeactivate={() => deactivateMutation.mutate(card.card_uid)}
+                    onDeactivate={() => deactivateMutation.mutate(card.id)}
                     onTopUp={() => handleTopUp(card)}
                     isDeactivating={deactivateMutation.isPending}
                   />
@@ -166,7 +161,7 @@ export default function TemporaryQRCards() {
                     key={card.id}
                     card={card}
                     onView={() => setSelectedCard(card)}
-                    onDeactivate={() => deactivateMutation.mutate(card.card_uid)}
+                    onDeactivate={() => deactivateMutation.mutate(card.id)}
                     onTopUp={() => {}}
                     isDeactivating={deactivateMutation.isPending}
                   />
@@ -206,12 +201,9 @@ export default function TemporaryQRCards() {
       {selectedCard && !showTopUpModal && (
         <CardDetailModal
           card={selectedCard}
-          allCards={cards || []}
           onClose={() => setSelectedCard(null)}
-          onSelectCard={setSelectedCard}
         />
       )}
-    </div>
     </div>
   );
 }
@@ -241,9 +233,9 @@ function CardListItem({
             <QrCode className="w-5 h-5 text-green-400" />
           </div>
           <div className="flex-1">
-            <p className="font-mono font-bold text-white text-sm">{card.card_uid}</p>
+            <p className="font-mono font-bold text-white text-sm">{card.cardId}</p>
             <p className="text-xs text-white/60">
-              {formatCardType(card.card_type)} · Issued {new Date(card.created_at).toLocaleDateString()}
+              {card.passengerType} · Issued {new Date(card.issuedAt).toLocaleDateString()}
             </p>
           </div>
         </div>
@@ -320,14 +312,15 @@ function GenerateModal({
   
   const previewCard: QRCard = {
     id: 'preview',
-    card_uid: previewCardId,
-    owner_name: 'Temporary Card',
-    card_type: passengerType.toLowerCase().replace(' ', '_') as any,
-    contact_number: '',
+    passengerId: 'preview',
+    cardId: previewCardId,
+    passengerName: 'Temporary Card',
+    passengerType,
+    contactNumber: '',
     status: 'active',
-    created_at: new Date().toISOString(),
+    issuedAt: new Date().toISOString(),
     balance: 0,
-    purchase_price: 0,
+    isTemporary: true,
   };
   
   const canvasRef = useTempCardCanvas(previewCard, qrRef);
@@ -376,7 +369,7 @@ function GenerateModal({
         {/* Right side - Card Preview */}
         <div className="flex-1 flex flex-col items-center justify-center ml-12">
           <div ref={qrRef} className="absolute opacity-0 pointer-events-none">
-            <QRCodeCanvas value={previewCard.card_uid} size={512} level="H" includeMargin={true} />
+            <QRCodeCanvas value={previewCard.cardId} size={512} level="H" includeMargin={true} />
           </div>
           
           <canvas
@@ -418,14 +411,6 @@ const TEMP_TEMPLATES: Record<string, string> = {
   'PWD': tempPwdCard,
 };
 
-function formatCardType(cardType: string): string {
-  if (!cardType) return 'Regular';
-  return cardType
-    .split('_')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
-
 function useTempCardCanvas(card: QRCard, qrRef: React.RefObject<HTMLDivElement | null>) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -437,8 +422,7 @@ function useTempCardCanvas(card: QRCard, qrRef: React.RefObject<HTMLDivElement |
 
     const timer = setTimeout(() => {
       const img = new Image();
-      const templateKey = formatCardType(card.card_type);
-      img.src = TEMP_TEMPLATES[templateKey] || tempRegularCard;
+      img.src = TEMP_TEMPLATES[card.passengerType] || tempRegularCard;
       img.onload = () => {
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
@@ -474,12 +458,11 @@ function useTempCardCanvas(card: QRCard, qrRef: React.RefObject<HTMLDivElement |
           'Senior Citizen': '#961995',
           'PWD': '#f70b0e',
         };
-        const displayType = formatCardType(card.card_type);
-        const cardIdColor = colorMap[displayType] || '#1362e2';
+        const cardIdColor = colorMap[card.passengerType] || '#1362e2';
         
         // Draw background rectangle to hide existing text
         ctx.font = `800 ${fontSize}px 'Courier New', monospace`;
-        const textWidth = ctx.measureText(card.card_uid).width;
+        const textWidth = ctx.measureText(card.cardId).width;
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(
           cardIdX - textWidth / 2 - 15,
@@ -492,7 +475,7 @@ function useTempCardCanvas(card: QRCard, qrRef: React.RefObject<HTMLDivElement |
         ctx.fillStyle = cardIdColor;
         ctx.textAlign = 'center';
         ctx.fillText(
-          card.card_uid,
+          card.cardId,
           cardIdX,
           cardIdY
         );
@@ -505,17 +488,7 @@ function useTempCardCanvas(card: QRCard, qrRef: React.RefObject<HTMLDivElement |
   return canvasRef;
 }
 
-function CardDetailModal({ 
-  card, 
-  allCards, 
-  onClose, 
-  onSelectCard 
-}: { 
-  card: QRCard; 
-  allCards: QRCard[]; 
-  onClose: () => void; 
-  onSelectCard: (card: QRCard) => void;
-}) {
+function CardDetailModal({ card, onClose }: { card: QRCard; onClose: () => void }) {
   const qrRef = useRef<HTMLDivElement>(null);
   const canvasRef = useTempCardCanvas(card, qrRef);
   const [showBack, setShowBack] = useState(false);
@@ -528,7 +501,7 @@ function CardDetailModal({
         printWindow.document.write(`
           <html>
             <head>
-              <title>Temporary Card - ${card.card_uid}</title>
+              <title>Temporary Card - ${card.cardId}</title>
               <style>
                 body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
                 img { max-width: 100%; height: auto; }
@@ -550,121 +523,80 @@ function CardDetailModal({
       isOpen={true}
       onClose={onClose}
       title="Card Details"
-      size="large"
     >
-      {/* Split pane layout */}
-      <div className="flex gap-4 h-[600px]">
-        {/* Left pane — Card List */}
-        <div className="w-1/3 border-r border-white/20 pr-4 overflow-y-auto">
-          <h3 className="text-sm font-semibold text-white/60 mb-3">All Temporary Cards ({allCards.length})</h3>
-          <div className="space-y-2">
-            {allCards.map((c: QRCard) => (
-              <div
-                key={c.id}
-                onClick={() => onSelectCard(c)}
-                className={`p-3 rounded-xl cursor-pointer transition-all ${
-                  c.id === card.id 
-                    ? 'bg-green-500/30 border border-green-500/50' 
-                    : 'bg-white/10 border border-white/20 hover:bg-white/20'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-green-500/20">
-                    <QrCode className="w-4 h-4 text-green-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-mono font-bold text-white text-xs truncate">{c.card_uid}</p>
-                    <p className="text-xs text-white/60 truncate">{formatCardType(c.card_type)}</p>
-                  </div>
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    c.status === 'active' 
-                      ? 'bg-green-500/20 text-green-400' 
-                      : 'bg-white/10 text-white/60'
-                  }`}>
-                    {c.status === 'active' ? 'Active' : 'Inactive'}
-                  </span>
-                </div>
-              </div>
-            ))}
+      {/* Two-column layout */}
+      <div className="flex gap-6">
+        {/* Left column — Information */}
+        <div className="flex-1 space-y-3 max-w-md">
+          <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-2xl">
+            <p className="text-xs text-white/60 mb-1">Card ID</p>
+            <p className="font-mono font-bold text-base text-white break-all">{card.cardId}</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="p-4 bg-white/10 border border-white/20 rounded-2xl">
+              <p className="text-xs text-white/60 mb-1">Balance</p>
+              <p className="font-bold text-xl text-green-400">₱100.00</p>
+            </div>
+            <div className="p-4 bg-white/10 border border-white/20 rounded-2xl">
+              <p className="text-xs text-white/60 mb-1">Status</p>
+              <p className={`font-bold text-xl capitalize ${
+                card.status === 'active' ? 'text-green-400' : 'text-white/60'
+              }`}>
+                {card.status}
+              </p>
+            </div>
+          </div>
+          <div className="p-4 bg-white/10 border border-white/20 rounded-2xl">
+            <p className="text-xs text-white/60 mb-1">Issued Date</p>
+            <p className="font-semibold text-white text-sm">
+              {new Date(card.issuedAt).toLocaleString()}
+            </p>
+          </div>
+          <div className="p-4 bg-blue-500/20 border border-blue-500/30 rounded-2xl">
+            <p className="text-xs text-blue-300 mb-2 font-semibold">How it works:</p>
+            <ul className="text-xs text-blue-200 space-y-1">
+              <li>• Card has ₱100 initial balance</li>
+              <li>• Can be used for multiple trips</li>
+              <li>• Passenger holds card until trip end</li>
+              <li>• Conductor scans and displays fare</li>
+              <li>• Balance deducted per trip</li>
+            </ul>
           </div>
         </div>
 
-        {/* Right pane — Card Details */}
-        <div className="flex-1 pl-4 overflow-y-auto">
-          <div className="flex gap-6">
-            {/* Left column — Information */}
-            <div className="flex-1 space-y-3 max-w-md">
-              <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-2xl">
-                <p className="text-xs text-white/60 mb-1">Card ID</p>
-                <p className="font-mono font-bold text-base text-white break-all">{card.card_uid}</p>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-4 bg-white/10 border border-white/20 rounded-2xl">
-                  <p className="text-xs text-white/60 mb-1">Balance</p>
-                  <p className="font-bold text-xl text-green-400">₱100.00</p>
-                </div>
-                <div className="p-4 bg-white/10 border border-white/20 rounded-2xl">
-                  <p className="text-xs text-white/60 mb-1">Status</p>
-                  <p className={`font-bold text-xl capitalize ${
-                    card.status === 'active' ? 'text-green-400' : 'text-white/60'
-                  }`}>
-                    {card.status}
-                  </p>
-                </div>
-              </div>
-              <div className="p-4 bg-white/10 border border-white/20 rounded-2xl">
-                <p className="text-xs text-white/60 mb-1">Issued Date</p>
-                <p className="font-semibold text-white text-sm">
-                  {new Date(card.created_at).toLocaleString()}
-                </p>
-              </div>
-              <div className="p-4 bg-blue-500/20 border border-blue-500/30 rounded-2xl">
-                <p className="text-xs text-blue-300 mb-2 font-semibold">How it works:</p>
-                <ul className="text-xs text-blue-200 space-y-1">
-                  <li>• Card has ₱100 initial balance</li>
-                  <li>• Can be used for multiple trips</li>
-                  <li>• Passenger holds card until trip end</li>
-                  <li>• Conductor scans and displays fare</li>
-                  <li>• Balance deducted per trip</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Right column — QR Card */}
-            <div className="flex flex-col items-center justify-center gap-4 min-w-56 max-w-72">
-              <div ref={qrRef} className="absolute opacity-0 pointer-events-none">
-                <QRCodeCanvas value={card.card_uid} size={512} level="H" includeMargin={true} />
-              </div>
-              
-              {showBack ? (
-                <img src={tempBackCard} alt="Card back" className="w-full rounded-2xl shadow-lg" />
-              ) : (
-                <canvas
-                  ref={canvasRef}
-                  className="w-full rounded-2xl shadow-lg"
-                  style={{ imageRendering: 'crisp-edges' }}
-                />
-              )}
-              
-              <div className="flex gap-2">
-                <Button
-                  onClick={() => setShowBack(v => !v)}
-                  variant="secondary"
-                  size="sm"
-                >
-                  {showBack ? 'Show Front' : 'Show Back'}
-                </Button>
-                <Button
-                  onClick={handlePrint}
-                  variant="secondary"
-                  size="sm"
-                  className="bg-green-500/20 hover:bg-green-500/30 text-green-400 border-green-500/30"
-                >
-                  <Printer className="w-4 h-4" />
-                  Print
-                </Button>
-              </div>
-            </div>
+        {/* Right column — QR Card */}
+        <div className="flex flex-col items-center justify-center gap-4 min-w-56 max-w-72">
+          <div ref={qrRef} className="absolute opacity-0 pointer-events-none">
+            <QRCodeCanvas value={card.cardId} size={512} level="H" includeMargin={true} />
+          </div>
+          
+          {showBack ? (
+            <img src={tempBackCard} alt="Card back" className="w-full rounded-2xl shadow-lg" />
+          ) : (
+            <canvas
+              ref={canvasRef}
+              className="w-full rounded-2xl shadow-lg"
+              style={{ imageRendering: 'crisp-edges' }}
+            />
+          )}
+          
+          <div className="flex gap-2">
+            <Button
+              onClick={() => setShowBack(v => !v)}
+              variant="secondary"
+              size="sm"
+            >
+              {showBack ? 'Show Front' : 'Show Back'}
+            </Button>
+            <Button
+              onClick={handlePrint}
+              variant="secondary"
+              size="sm"
+              className="bg-green-500/20 hover:bg-green-500/30 text-green-400 border-green-500/30"
+            >
+              <Printer className="w-4 h-4" />
+              Print
+            </Button>
           </div>
         </div>
       </div>
@@ -710,7 +642,7 @@ function TopUpModal({
       <div className="space-y-4 mb-6">
         <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-2xl">
           <p className="text-xs text-white/60 mb-1">Card ID</p>
-          <p className="font-mono font-bold text-lg text-white">{card.card_uid}</p>
+          <p className="font-mono font-bold text-lg text-white">{card.cardId}</p>
         </div>
         <FormField name="amount" label="Top-up Amount (₱)">
           {(field) => (
