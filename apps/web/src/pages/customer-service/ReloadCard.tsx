@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { Button, Input, Form, FormField, Modal } from '@commutai/ui';
+import AuditService from '../../services/auditService';
 
 interface QRCard {
   id: string;
@@ -109,6 +110,8 @@ export default function ReloadCard() {
   const reloadMutation = useMutation({
     mutationFn: () => apiCalls.topUp(cardId, amount, 'cash'),
     onSuccess: (data) => {
+      const prevBalance = (data?.balance_after ?? 0) - amount;
+      AuditService.logCardReloaded(cardId, amount, prevBalance, data?.balance_after ?? 0);
       toast.success(`Card reloaded successfully! Amount: ₱${amount.toFixed(2)}`);
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
@@ -142,6 +145,7 @@ export default function ReloadCard() {
   };
 
   return (
+    <div className="h-full overflow-y-auto pr-1">
     <div>
       <h1 className="text-xl font-bold text-white mb-4">Reload Card</h1>
 
@@ -309,6 +313,7 @@ export default function ReloadCard() {
           onClose={() => setShowReceipt(null)}
         />
       )}
+    </div>
     </div>
   );
 }

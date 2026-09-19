@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Search, Check, X, Printer, Clock, UserPlus, CreditCard, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Button, Input, Modal } from '@commutai/ui';
+import AuditService from '../../services/auditService';
 
 interface CardReservation {
   id: string;
@@ -65,17 +66,12 @@ export default function CardReservations() {
       await sendSMSNotification(data.contact, 'approved', data.name);
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      AuditService.logCardReservationApproved(data.id, data.name);
       toast.success('Reservation approved and SMS sent!');
       queryClient.invalidateQueries({ queryKey: ['cardReservations'] });
       setSelectedReservation(null);
-    },
-    onError: (err: Error) => {
-      toast.error(`Failed to approve: ${err.message}`);
-    },
-  });
-
-  const denyMutation = useMutation({
+    }, = useMutation({
     mutationFn: async (reservationId: string) => {
       const { data, error } = await supabase
         .from('card_reservations')
@@ -89,7 +85,8 @@ export default function CardReservations() {
       await sendSMSNotification(data.contact, 'denied', data.name);
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      AuditService.logCardReservationDenied(data.id, data.name);
       toast.success('Reservation denied and SMS sent!');
       queryClient.invalidateQueries({ queryKey: ['cardReservations'] });
       setSelectedReservation(null);
@@ -110,7 +107,8 @@ export default function CardReservations() {
       if (error) throw error;
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      AuditService.logCardReservationPrinted(data.id, data.name);
       toast.success('Card marked for printing!');
       queryClient.invalidateQueries({ queryKey: ['cardReservations'] });
       printCard(selectedReservation);
@@ -144,7 +142,8 @@ export default function CardReservations() {
       
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      AuditService.logCardIssued(data.id, data.name, data.card_uid || '');
       toast.success('Card issued successfully!');
       queryClient.invalidateQueries({ queryKey: ['cardReservations'] });
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
@@ -177,7 +176,8 @@ export default function CardReservations() {
       
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      AuditService.logCardReservationEdited(data.id, data.name);
       toast.success('Reservation reassigned successfully and SMS sent!');
       queryClient.invalidateQueries({ queryKey: ['cardReservations'] });
       setSelectedReservation(null);
@@ -282,7 +282,8 @@ export default function CardReservations() {
   }
 
   return (
-    <div>
+    <div className="h-full overflow-y-auto pr-1">
+    <div className="p-1 space-y-4">
       <div className="flex items-center justify-between mb-3">
         <h1 className="text-xl font-bold text-white">Card Reservation Management</h1>
       </div>
@@ -452,6 +453,7 @@ export default function CardReservations() {
           onClose={() => setViewDetails(null)}
         />
       )}
+    </div>
     </div>
   );
 }

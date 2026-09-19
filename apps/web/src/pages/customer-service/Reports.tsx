@@ -180,6 +180,7 @@ export default function Reports() {
   ];
 
   return (
+    <div className="h-full overflow-y-auto pr-1">
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-bold text-white">Reports & Analytics</h1>
@@ -435,6 +436,7 @@ export default function Reports() {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 }

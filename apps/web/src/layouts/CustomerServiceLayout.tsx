@@ -23,10 +23,10 @@ interface NavItem {
 
 const navigation: NavItem[] = [
   { name: 'Dashboard', href: '.', icon: LayoutDashboard },
-  { name: 'QR Cards', href: 'qr-cards', icon: CreditCard },
+  { name: 'QR Card Management', href: 'qr-cards', icon: CreditCard },
   { name: 'Reload Card', href: 'reload-card', icon: RefreshCw },
-  { name: 'Card Reservations', href: 'card-reservations', icon: Users },
-  { name: 'Transactions', href: 'transactions', icon: History },
+  { name: 'Card Reservation Management', href: 'card-reservations', icon: Users },
+  { name: 'Transaction History', href: 'transactions', icon: History },
   { name: 'Reports', href: 'reports', icon: BarChart3 },
 ];
 
@@ -143,11 +143,11 @@ export default function AdminLayout() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex overflow-hidden">
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       <main className={`transition-all duration-300 flex-1 flex flex-col ${isOpen ? 'ml-64' : 'ml-20'} p-6 overflow-hidden`}>
         <Header />
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 min-h-0 overflow-y-auto">
           <Outlet />
         </div>
       </main>

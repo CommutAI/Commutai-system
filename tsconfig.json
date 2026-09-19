@@ -9,6 +9,5 @@
     "esModuleInterop": true,
     "strict": true,
     "types": ["node"]
-  },
-  "include": ["playwright.config.ts"]
+  }
 }

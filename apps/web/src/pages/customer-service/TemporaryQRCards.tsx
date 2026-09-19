@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import toast from 'react-hot-toast';
 import { Button, Input, FormField, Modal, Select } from '@commutai/ui';
+import AuditService from '../../services/auditService';
 
 import tempRegularCard from './assets/TEMP-REG.png';
 import tempStudentCard from './assets/TEMP-STUD.png';
@@ -28,7 +29,8 @@ export default function TemporaryQRCards() {
   const generateMutation = useMutation({
     mutationFn: (passengerType: 'Regular' | 'Student' | 'Senior Citizen' | 'PWD') => 
       apiCalls.createTemporaryQRCard(passengerType as any),
-    onSuccess: () => {
+    onSuccess: (data: any) => {
+      AuditService.logTempCardGenerated(data?.card_uid || data?.id || 'unknown', data?.card_type || 'Regular');
       toast.success('Temporary QR Card generated successfully!');
       queryClient.invalidateQueries({ queryKey: ['temporaryQRCards'] });
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
@@ -41,7 +43,8 @@ export default function TemporaryQRCards() {
 
   const deactivateMutation = useMutation({
     mutationFn: apiCalls.deactivateTemporaryQRCard,
-    onSuccess: () => {
+    onSuccess: (_data: any, cardUid: string) => {
+      AuditService.logTempCardDeactivated(cardUid);
       toast.success('Temporary card deactivated successfully!');
       queryClient.invalidateQueries({ queryKey: ['temporaryQRCards'] });
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
@@ -54,7 +57,8 @@ export default function TemporaryQRCards() {
 
   const topUpMutation = useMutation({
     mutationFn: (cardId: string) => apiCalls.topUp(cardId, parseFloat(topUpAmount), 'cash'),
-    onSuccess: () => {
+    onSuccess: (_data: any, cardId: string) => {
+      AuditService.logTempCardTopUp(cardId, parseFloat(topUpAmount));
       toast.success(`Card topped up successfully! Amount: ₱${parseFloat(topUpAmount).toFixed(2)}`);
       queryClient.invalidateQueries({ queryKey: ['temporaryQRCards'] });
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
@@ -78,6 +82,7 @@ export default function TemporaryQRCards() {
   const totalBalance = activeCards.length * 100; // Each card has ₱100 balance
 
   return (
+    <div className="h-full overflow-y-auto pr-1">
     <div>
       <div className="flex justify-between items-center mb-6">
         <div>
@@ -206,6 +211,7 @@ export default function TemporaryQRCards() {
           onSelectCard={setSelectedCard}
         />
       )}
+    </div>
     </div>
   );
 }
