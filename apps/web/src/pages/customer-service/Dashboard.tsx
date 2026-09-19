@@ -140,7 +140,8 @@ export default function Dashboard() {
                   border: '1px solid rgba(255,255,255,0.2)',
                   color: 'white'
                 } as React.CSSProperties}
-                formatter={(value: number | undefined) => [`₱${value || 0}`, 'Revenue']}
+                labelFormatter={(label: string) => label}
+                formatter={(value: number) => [`₱${value}`, 'Revenue']}
               />
               <Line type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={3} dot={{ fill: '#10b981', r: 5 }} />
             </LineChart>
