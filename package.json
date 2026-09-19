@@ -5,10 +5,10 @@
   "description": "CommutAI Transportation Management System",
   "scripts": {
     "dev": "cd apps/web && npm run dev",
-    "dev:public": "cd apps/public-dashboard && npm run dev",
-    "dev:all": "concurrently \"npm run dev\" \"npm run dev:public\"",
+    "dev:web": "cd apps/web && npm run dev",
+    "dev:conductor": "cd apps/conductor-web && npm run dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:conductor\"",
     "build": "cd apps/web && npm run build",
-    "build:public": "cd apps/public-dashboard && npm run build",
     "test": "turbo test",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
@@ -20,14 +20,16 @@
   "devDependencies": {
     "@playwright/test": "^1.49.1",
     "@types/node": "^24.13.2",
+    "@vitejs/plugin-react": "^6.1.1",
     "concurrently": "^8.2.2",
     "prettier": "^3.3.3",
-    "turbo": "^2.0.0"
+    "turbo": "^2.0.0",
+    "vite": "^8.3.0"
   },
   "packageManager": "npm@10.0.0",
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=10.0.0"
+    "npm": ">=18.0.0"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",

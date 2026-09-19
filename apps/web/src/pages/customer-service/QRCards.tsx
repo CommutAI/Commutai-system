@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuditService from '../../services/auditService';
 import { QRCodeSVG, QRCodeCanvas } from 'qrcode.react';
 // import QRCardDisplay from "../../components/QRCardDisplay";
 // import TemporaryCardDisplay from "../../components/TemporaryCardDisplay";
@@ -412,7 +413,8 @@ function EditCardModal({
   const updateMutation = useMutation({
     mutationFn: (updates: { owner_name: string; contact_number: string }) => 
       apiCalls.updateQRCard(card.id, updates),
-    onSuccess: () => {
+    onSuccess: (_data: any, updates: { owner_name: string; contact_number: string }) => {
+      AuditService.logQRCardUpdated(card.id, card.card_uid, `name=${updates.owner_name}, contact=${updates.contact_number}`);
       toast.success('Card updated successfully!');
       onSuccess();
       onClose();
@@ -793,7 +795,8 @@ export default function QRCards() {
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => apiCalls.deleteQRCard(id),
-    onSuccess: () => {
+    onSuccess: (_data: any, id: string) => {
+      if (deleteCard) AuditService.logQRCardDeleted(id, deleteCard.card_uid);
       toast.success('Card deleted successfully!');
       queryClient.invalidateQueries({ queryKey: ['qrCards'] });
       setDeleteCard(null);
@@ -833,7 +836,8 @@ export default function QRCards() {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="h-full overflow-y-auto pr-1">
+    <div className="flex flex-col">
       {/* Page header */}
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-white">QR Card Management</h1>
@@ -1170,6 +1174,7 @@ export default function QRCards() {
           isGenerating={generateTempMutation.isPending}
         />
       )}
+    </div>
     </div>
   );
 }

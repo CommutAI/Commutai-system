@@ -93,6 +93,7 @@ export default function Transactions() {
   }
 
   return (
+    <div className="h-full overflow-y-auto pr-1">
     <div className="space-y-6">
       <div>
         <h1 className="text-white text-3xl font-bold mb-2">Transaction History</h1>
@@ -209,6 +210,7 @@ export default function Transactions() {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 }
