@@ -1,0 +1,25 @@
+{
+  "name": "@commutai/websocket-server",
+  "version": "1.0.0",
+  "description": "WebSocket server for GPS data broadcasting from Raspberry Pi",
+  "main": "gps-websocket-server.js",
+  "scripts": {
+    "start": "node gps-websocket-server.js",
+    "dev": "node gps-websocket-server.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "websocket",
+    "gps",
+    "raspberry-pi",
+    "real-time"
+  ],
+  "author": "CommutAI",
+  "license": "MIT"
+}
