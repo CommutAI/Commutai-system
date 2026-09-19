@@ -8,7 +8,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
-    "types": ["node"]
-  },
-  "include": ["playwright.config.ts"]
+    "ignoreDeprecations": "6.0"
+  }
 }

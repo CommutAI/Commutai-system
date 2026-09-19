@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0f172a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+}
+
+.glass-sidebar {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Leaflet Map Container Fixes */
+.leaflet-container {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control-container {
+  position: relative;
+  z-index: 2;
+}
+
+.leaflet-popup {
+  position: relative;
+  z-index: 1000;
+}
+
+/* Fix for modal and overlay elements */
+.glass-card {
+  position: relative;
+  z-index: auto;
+}
+
+/* Ensure proper stacking context */
+.modal-overlay {
+  position: fixed;
+  z-index: 2000;
+}
+
+/* Fix for select dropdowns and form elements */
+select, input[type="date"] {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+select option {
+  background-color: #1e293b !important;
+  color: white !important;
+}
+
+/* Fix for any native dropdowns that might be rendering incorrectly */
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.bg-signal {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+}

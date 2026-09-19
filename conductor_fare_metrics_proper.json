@@ -1,0 +1,2154 @@
+{
+  "route_name": "Manalo Fortich Terminal \u2194 Agora Terminal",
+  "base_currency": "PHP",
+  "fare_type": "from_to_matrix",
+  "total_stops": 20,
+  "stops": [
+    {
+      "number": 1,
+      "name": "Gaisano CDO"
+    },
+    {
+      "number": 2,
+      "name": "Agora"
+    },
+    {
+      "number": 3,
+      "name": "Gusa"
+    },
+    {
+      "number": 4,
+      "name": "Cugman"
+    },
+    {
+      "number": 5,
+      "name": "Tablon Baloi"
+    },
+    {
+      "number": 6,
+      "name": "Tablon"
+    },
+    {
+      "number": 7,
+      "name": "Agusan"
+    },
+    {
+      "number": 8,
+      "name": "Puerto"
+    },
+    {
+      "number": 9,
+      "name": "Bae Upper Puerto"
+    },
+    {
+      "number": 10,
+      "name": "Mambatangan"
+    },
+    {
+      "number": 11,
+      "name": "Balubal"
+    },
+    {
+      "number": 12,
+      "name": "Maitum"
+    },
+    {
+      "number": 13,
+      "name": "Alae Manolo"
+    },
+    {
+      "number": 14,
+      "name": "Lunocan"
+    },
+    {
+      "number": 15,
+      "name": "Cawayanon"
+    },
+    {
+      "number": 16,
+      "name": "San Miguel"
+    },
+    {
+      "number": 17,
+      "name": "Dicklum"
+    },
+    {
+      "number": 18,
+      "name": "Tankulan"
+    },
+    {
+      "number": 19,
+      "name": "Sankanan"
+    },
+    {
+      "number": 20,
+      "name": "Kalugmanan Manolo"
+    }
+  ],
+  "fare_matrix": [
+    {
+      "from_stop": {
+        "number": 1,
+        "name": "Gaisano CDO"
+      },
+      "to_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 65,
+      "discounted_fare": 55
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 80,
+      "discounted_fare": 75
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 65,
+      "discounted_fare": 55
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 100,
+      "discounted_fare": 90
+    },
+    {
+      "from_stop": {
+        "number": 2,
+        "name": "Agora"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 110,
+      "discounted_fare": 100
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "regular_fare": 23,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 48,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 52,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 55
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 80,
+      "discounted_fare": 75
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 65,
+      "discounted_fare": 55
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 100,
+      "discounted_fare": 90
+    },
+    {
+      "from_stop": {
+        "number": 3,
+        "name": "Gusa"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 110,
+      "discounted_fare": 100
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "regular_fare": 17,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 75
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 60,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 70,
+      "discounted_fare": 60
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 70,
+      "discounted_fare": 60
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 95,
+      "discounted_fare": 85
+    },
+    {
+      "from_stop": {
+        "number": 4,
+        "name": "Cugman"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 105,
+      "discounted_fare": 95
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 60,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 70,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 95,
+      "discounted_fare": 85
+    },
+    {
+      "from_stop": {
+        "number": 5,
+        "name": "Tablon Baloi"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 105,
+      "discounted_fare": 95
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "regular_fare": 24,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 60,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 63,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 90,
+      "discounted_fare": 80
+    },
+    {
+      "from_stop": {
+        "number": 6,
+        "name": "Tablon"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 100,
+      "discounted_fare": 90
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 60,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 58,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 85,
+      "discounted_fare": 75
+    },
+    {
+      "from_stop": {
+        "number": 7,
+        "name": "Agusan"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 95,
+      "discounted_fare": 85
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 60,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 80,
+      "discounted_fare": 70
+    },
+    {
+      "from_stop": {
+        "number": 8,
+        "name": "Puerto"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 90,
+      "discounted_fare": 80
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 9,
+        "name": "Bae Upper Puerto"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 85,
+      "discounted_fare": 75
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 48,
+      "discounted_fare": 38
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 10,
+        "name": "Mambatangan"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 85,
+      "discounted_fare": 75
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 48,
+      "discounted_fare": 38
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 11,
+        "name": "Balubal"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 85,
+      "discounted_fare": 75
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 65,
+      "discounted_fare": 55
+    },
+    {
+      "from_stop": {
+        "number": 12,
+        "name": "Maitum"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 75,
+      "discounted_fare": 65
+    },
+    {
+      "from_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "to_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 30,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 13,
+        "name": "Alae Manolo"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 65,
+      "discounted_fare": 55
+    },
+    {
+      "from_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "to_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 20
+    },
+    {
+      "from_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 14,
+        "name": "Lunocan"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 60,
+      "discounted_fare": 50
+    },
+    {
+      "from_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "to_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 15,
+        "name": "Cawayanon"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "to_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 45,
+      "discounted_fare": 35
+    },
+    {
+      "from_stop": {
+        "number": 16,
+        "name": "San Miguel"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 55,
+      "discounted_fare": 45
+    },
+    {
+      "from_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "to_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "regular_fare": 15,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 40,
+      "discounted_fare": 30
+    },
+    {
+      "from_stop": {
+        "number": 17,
+        "name": "Dicklum"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 50,
+      "discounted_fare": 40
+    },
+    {
+      "from_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "to_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "regular_fare": 25,
+      "discounted_fare": 15
+    },
+    {
+      "from_stop": {
+        "number": 18,
+        "name": "Tankulan"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 35,
+      "discounted_fare": 25
+    },
+    {
+      "from_stop": {
+        "number": 19,
+        "name": "Sankanan"
+      },
+      "to_stop": {
+        "number": 20,
+        "name": "Kalugmanan Manolo"
+      },
+      "regular_fare": 20,
+      "discounted_fare": 15
+    }
+  ]
+}
