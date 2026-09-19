@@ -1,0 +1,140 @@
+{
+  "route_name": "Manalo Fortich Terminal \u2194 Agora Terminal",
+  "base_currency": "PHP",
+  "fare_type": "distance_based",
+  "stops": [
+    {
+      "stop_number": 2,
+      "stop_name": "Agora",
+      "regular_fare": 110,
+      "discounted_fare": 100,
+      "fare_variations": 18
+    },
+    {
+      "stop_number": 7,
+      "stop_name": "Agusan",
+      "regular_fare": 95,
+      "discounted_fare": 85,
+      "fare_variations": 13
+    },
+    {
+      "stop_number": 13,
+      "stop_name": "Alae Manolo",
+      "regular_fare": 65,
+      "discounted_fare": 55,
+      "fare_variations": 7
+    },
+    {
+      "stop_number": 9,
+      "stop_name": "Bae Upper Puerto",
+      "regular_fare": 85,
+      "discounted_fare": 75,
+      "fare_variations": 11
+    },
+    {
+      "stop_number": 11,
+      "stop_name": "Balubal",
+      "regular_fare": 85,
+      "discounted_fare": 75,
+      "fare_variations": 9
+    },
+    {
+      "stop_number": 15,
+      "stop_name": "Cawayanon",
+      "regular_fare": 55,
+      "discounted_fare": 45,
+      "fare_variations": 5
+    },
+    {
+      "stop_number": 4,
+      "stop_name": "Cugman",
+      "regular_fare": 105,
+      "discounted_fare": 95,
+      "fare_variations": 16
+    },
+    {
+      "stop_number": 17,
+      "stop_name": "Dicklum",
+      "regular_fare": 50,
+      "discounted_fare": 40,
+      "fare_variations": 3
+    },
+    {
+      "stop_number": 1,
+      "stop_name": "Gaisano CDO",
+      "regular_fare": 15,
+      "discounted_fare": 15,
+      "fare_variations": 1
+    },
+    {
+      "stop_number": 3,
+      "stop_name": "Gusa",
+      "regular_fare": 110,
+      "discounted_fare": 100,
+      "fare_variations": 17
+    },
+    {
+      "stop_number": 14,
+      "stop_name": "Lunocan",
+      "regular_fare": 60,
+      "discounted_fare": 50,
+      "fare_variations": 6
+    },
+    {
+      "stop_number": 12,
+      "stop_name": "Maitum",
+      "regular_fare": 75,
+      "discounted_fare": 65,
+      "fare_variations": 8
+    },
+    {
+      "stop_number": 10,
+      "stop_name": "Mambatangan",
+      "regular_fare": 85,
+      "discounted_fare": 75,
+      "fare_variations": 10
+    },
+    {
+      "stop_number": 8,
+      "stop_name": "Puerto",
+      "regular_fare": 90,
+      "discounted_fare": 80,
+      "fare_variations": 12
+    },
+    {
+      "stop_number": 16,
+      "stop_name": "San Miguel",
+      "regular_fare": 55,
+      "discounted_fare": 45,
+      "fare_variations": 4
+    },
+    {
+      "stop_number": 19,
+      "stop_name": "Sankanan",
+      "regular_fare": 20,
+      "discounted_fare": 15,
+      "fare_variations": 1
+    },
+    {
+      "stop_number": 6,
+      "stop_name": "Tablon",
+      "regular_fare": 100,
+      "discounted_fare": 90,
+      "fare_variations": 14
+    },
+    {
+      "stop_number": 5,
+      "stop_name": "Tablon Baloi",
+      "regular_fare": 105,
+      "discounted_fare": 95,
+      "fare_variations": 15
+    },
+    {
+      "stop_number": 18,
+      "stop_name": "Tankulan",
+      "regular_fare": 35,
+      "discounted_fare": 25,
+      "fare_variations": 2
+    }
+  ]
+}

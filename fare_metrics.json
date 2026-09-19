@@ -1,0 +1,1334 @@
+{
+  "Sheet1": [
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": "=15*0.8",
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 1,
+      "Name stoppage": "Gaisano CDO",
+      "null": null,
+      "Regular Fare": 0,
+      "Discounted Fare": 0
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 65,
+      "Discounted Fare": 55
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 80,
+      "Discounted Fare": 75
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 65,
+      "Discounted Fare": 55
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 100,
+      "Discounted Fare": 90
+    },
+    {
+      "Nos.": 2,
+      "Name stoppage": "Agora",
+      "null": null,
+      "Regular Fare": 110,
+      "Discounted Fare": 100
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 23,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 48,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 52,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 55
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 80,
+      "Discounted Fare": 75
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 65,
+      "Discounted Fare": 55
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 100,
+      "Discounted Fare": 90
+    },
+    {
+      "Nos.": 3,
+      "Name stoppage": "Gusa",
+      "null": null,
+      "Regular Fare": 110,
+      "Discounted Fare": 100
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 17,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 75
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 60,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 70,
+      "Discounted Fare": 60
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 70,
+      "Discounted Fare": 60
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 95,
+      "Discounted Fare": 85
+    },
+    {
+      "Nos.": 4,
+      "Name stoppage": "Cugman",
+      "null": null,
+      "Regular Fare": 105,
+      "Discounted Fare": 95
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 60,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 70,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 95,
+      "Discounted Fare": 85
+    },
+    {
+      "Nos.": 5,
+      "Name stoppage": "Tablon Baloi",
+      "null": null,
+      "Regular Fare": 105,
+      "Discounted Fare": 95
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 24,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 60,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 63,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 90,
+      "Discounted Fare": 80
+    },
+    {
+      "Nos.": 6,
+      "Name stoppage": "Tablon",
+      "null": null,
+      "Regular Fare": 100,
+      "Discounted Fare": 90
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 60,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 58,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 85,
+      "Discounted Fare": 75
+    },
+    {
+      "Nos.": 7,
+      "Name stoppage": "Agusan",
+      "null": null,
+      "Regular Fare": 95,
+      "Discounted Fare": 85
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 60,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 80,
+      "Discounted Fare": 70
+    },
+    {
+      "Nos.": 8,
+      "Name stoppage": "Puerto",
+      "null": null,
+      "Regular Fare": 90,
+      "Discounted Fare": 80
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 9,
+      "Name stoppage": "Bae Upper Puerto",
+      "null": null,
+      "Regular Fare": 85,
+      "Discounted Fare": 75
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 48,
+      "Discounted Fare": 38
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 10,
+      "Name stoppage": "Mambatangan",
+      "null": null,
+      "Regular Fare": 85,
+      "Discounted Fare": 75
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 48,
+      "Discounted Fare": 38
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 11,
+      "Name stoppage": "Balubal",
+      "null": null,
+      "Regular Fare": 85,
+      "Discounted Fare": 75
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 65,
+      "Discounted Fare": 55
+    },
+    {
+      "Nos.": 12,
+      "Name stoppage": "Maitum",
+      "null": null,
+      "Regular Fare": 75,
+      "Discounted Fare": 65
+    },
+    {
+      "Nos.": 13,
+      "Name stoppage": "Alae Manolo",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 13,
+      "Name stoppage": "Alae Manolo",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 13,
+      "Name stoppage": "Alae Manolo",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 13,
+      "Name stoppage": "Alae Manolo",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 13,
+      "Name stoppage": "Alae Manolo",
+      "null": null,
+      "Regular Fare": 30,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 13,
+      "Name stoppage": "Alae Manolo",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 13,
+      "Name stoppage": "Alae Manolo",
+      "null": null,
+      "Regular Fare": 65,
+      "Discounted Fare": 55
+    },
+    {
+      "Nos.": 14,
+      "Name stoppage": "Lunocan",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 14,
+      "Name stoppage": "Lunocan",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 14,
+      "Name stoppage": "Lunocan",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 14,
+      "Name stoppage": "Lunocan",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 20
+    },
+    {
+      "Nos.": 14,
+      "Name stoppage": "Lunocan",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 14,
+      "Name stoppage": "Lunocan",
+      "null": null,
+      "Regular Fare": 60,
+      "Discounted Fare": 50
+    },
+    {
+      "Nos.": 15,
+      "Name stoppage": "Cawayanon",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 15,
+      "Name stoppage": "Cawayanon",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 15,
+      "Name stoppage": "Cawayanon",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 15,
+      "Name stoppage": "Cawayanon",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 15,
+      "Name stoppage": "Cawayanon",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 16,
+      "Name stoppage": "San Miguel",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 16,
+      "Name stoppage": "San Miguel",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 16,
+      "Name stoppage": "San Miguel",
+      "null": null,
+      "Regular Fare": 45,
+      "Discounted Fare": 35
+    },
+    {
+      "Nos.": 16,
+      "Name stoppage": "San Miguel",
+      "null": null,
+      "Regular Fare": 55,
+      "Discounted Fare": 45
+    },
+    {
+      "Nos.": 17,
+      "Name stoppage": "Dicklum",
+      "null": null,
+      "Regular Fare": 15,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 17,
+      "Name stoppage": "Dicklum",
+      "null": null,
+      "Regular Fare": 40,
+      "Discounted Fare": 30
+    },
+    {
+      "Nos.": 17,
+      "Name stoppage": "Dicklum",
+      "null": null,
+      "Regular Fare": 50,
+      "Discounted Fare": 40
+    },
+    {
+      "Nos.": 18,
+      "Name stoppage": "Tankulan",
+      "null": null,
+      "Regular Fare": 25,
+      "Discounted Fare": 15
+    },
+    {
+      "Nos.": 18,
+      "Name stoppage": "Tankulan",
+      "null": null,
+      "Regular Fare": 35,
+      "Discounted Fare": 25
+    },
+    {
+      "Nos.": 19,
+      "Name stoppage": "Sankanan",
+      "null": null,
+      "Regular Fare": 20,
+      "Discounted Fare": 15
+    }
+  ]
+}
