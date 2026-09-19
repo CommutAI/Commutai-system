@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { apiCalls } from "../../lib/api";
-import type { QRCard } from '../types';
+import type { QRCard } from '@commutai/types';
 import { Users, DollarSign, CreditCard, TrendingUp, RefreshCw, Ticket, type LucideIcon } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@commutai/ui';
@@ -119,7 +119,7 @@ export default function Dashboard() {
                   borderRadius: '12px', 
                   border: '1px solid rgba(255,255,255,0.2)',
                   color: 'white'
-                }}
+                } as React.CSSProperties}
               />
               <Bar dataKey="transactions" fill="#3b82f6" radius={[8, 8, 0, 0]} />
             </BarChart>
@@ -139,8 +139,8 @@ export default function Dashboard() {
                   borderRadius: '12px', 
                   border: '1px solid rgba(255,255,255,0.2)',
                   color: 'white'
-                }}
-                formatter={(value) => [`₱${value}`, 'Revenue']}
+                } as React.CSSProperties}
+                formatter={(value: number) => [`₱${value}`, 'Revenue']}
               />
               <Line type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={3} dot={{ fill: '#10b981', r: 5 }} />
             </LineChart>
@@ -172,7 +172,7 @@ export default function Dashboard() {
                   borderRadius: '12px', 
                   border: '1px solid rgba(255,255,255,0.2)',
                   color: 'white'
-                }}
+                } as React.CSSProperties}
               />
             </PieChart>
           </ResponsiveContainer>

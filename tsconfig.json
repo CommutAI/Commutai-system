@@ -7,7 +7,6 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "strict": true,
-    "types": ["node"]
+    "strict": true
   }
 }
